@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=inicio
+Comment=Aplicacion principal
+Icon=/usr/share/eum/iconos/logo_parking.png
+Exec=python3 /usr/share/eum/app/Inicio.py
+Terminal=true

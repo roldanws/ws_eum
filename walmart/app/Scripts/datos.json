@@ -1,0 +1,44 @@
+[
+    {
+        "tipo_informacion" : "ADMINISTRACION",
+        "monto_ingresar": 1, 
+        "monto_ingresado": 1, 
+        "monto_a_dispensar": 0, 
+        "folio": 0, 
+        "hora_entrada": 0, 
+        "tiempo_total": "", 
+        "interfaz": 1, 
+        "descuento": 0, 
+        "X_18": 0, 
+        "X_19": 0, 
+        "X_20": 0, 
+        "X_21": 0, 
+        "X_22": 0
+    },
+
+    {
+        "tipo_informacion" : "CONTROL",
+        "dato_1" : "1",
+        "dato_2" : "2"
+
+    },
+
+    {
+        "tipo_informacion" : "ESTADO",
+        "Monedero" : "Conectado",
+        "Fabricante" :  "Nombre del fabricante",
+        "Modelo" : "",
+        "Número de Serie" : "Número de serie",
+        "Versión de Software" : "",
+        "Estado actual del Monedero" : ""
+
+    }
+
+
+
+]
+
+
+
+
+

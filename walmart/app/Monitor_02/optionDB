@@ -1,0 +1,10 @@
+*font:		Verdana 10
+*Label*font:		Verdana 10 bold
+*Combobox*background		white
+*background:		#FAE5D3
+*Entry*background:		white
+*Frame*background:		white
+*foreground:		black
+*Listbox*foreground:		RoyaBlue
+*ScrolledText*background:		white
+

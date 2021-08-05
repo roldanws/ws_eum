@@ -1,0 +1,119 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+
+
+/* 
+    Created on : 25 mar 2020, 11:33:27
+    Author     : dl17
+*/
+
+body {
+    /*
+    font-size: 14px;
+    line-height: 1.6;
+    color: #222;
+    font-weight: 400;
+    font-family: 'Poppins';
+    margin: 0px;
+    background-color: #e0e0e0;
+    */
+    background-image: url("../images/f3.jpg");
+    color: white;
+}
+
+.container {
+    margin-left: -50px;
+    margin: 0;
+}
+
+.insert-ticket {
+    font-size: 80px;
+    color: white;
+}
+
+.insert-ticket-description {
+    font-size: 30px;
+    color: lightgray;
+}
+
+.insert-ticket-description:active {
+    background-color: yellow;
+    color: red;
+}
+
+.menu-card {
+    /* margin: 20px;
+    margin-left: 100px; */
+    background-color: lightblue;
+    max-width: 550px;
+    max-height: 350px;
+    height: 200px;
+    min-height: 100px;
+    color: green;
+}
+
+.info-card {
+    /* margin: 20px;
+    margin-left: 100px; */
+    /* margin-left: 50%;
+    background-color: lightblue;
+    max-width: 550px;
+    max-height: 350px;
+    color: black; */
+}
+
+.card-info-dinero {
+    background-color: lightblue;
+    max-width: 550px;
+    max-height: 350px;
+    color: white;
+}
+
+.list-group {
+    max-width: 550px;
+    max-height: 350px;
+    color: white;
+}
+
+.img-responsive {
+    width: 310px;
+    margin-bottom: -300px;
+    /*Con este margen la imagen no desplaza a la fila de abajo*/
+}
+
+.card-img-top {
+    max-width: 250px;
+    max-height: 200px;
+    padding: 50px;
+}
+
+.vertical-center {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.main {
+    /* padding: 45px 0; */
+}
+
+.container {
+    /* For browsers that do not support gradients */
+    /* Standard syntax (must be last) */
+}
+
+#boton_ticket,
+#retorno,
+#presencia {
+    color: black;
+}
+
+
+/*DL17*/

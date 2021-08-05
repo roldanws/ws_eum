@@ -1,0 +1,321 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+
+
+/* 
+    Created on : 25 mar 2020, 11:33:27
+    Author     : dl17
+*/
+
+body {
+    /*
+    font-size: 14px;
+    line-height: 1.6;
+    color: #222;
+    font-weight: 400;
+    font-family: 'Poppins';
+    margin: 0px;
+    background-color: #e0e0e0;
+    */
+    background-image: url("../images/f3.jpg");
+}
+
+.tab-pane .fade {
+    color: white;
+}
+
+.main {
+    /* padding: 45px 0; */
+}
+
+.container {
+    /* For browsers that do not support gradients */
+    /* Standard syntax (must be last) */
+}
+
+
+/*DL17*/
+
+.card {
+    /* background-color: #fff;
+    border-radius: 10px;
+    width: 400px;
+    margin-left: 70px;
+    height: 180px;
+    position: absolute;
+    padding: 24px;
+    color: #444;
+    color: rgb(214, 214, 214);
+    box-shadow: 0 15px 25px 0 black;
+    cursor: pointer; */
+}
+
+.card-upper {
+    margin-top: 150px;
+}
+
+.card-middle {
+    margin-top: 400px;
+}
+
+.card-bottom {
+    margin-top: 650px;
+}
+
+.card-not-ticket {
+    /* background-color: #11222c;
+    border-radius: 10px;
+    width: 250px;
+    margin-top: 600px;
+    margin-left: 810px;
+    height: 70px;
+    position: absolute;
+    padding: 15px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 25px;
+    cursor: pointer;
+    box-shadow: 0 1px 2px 0 black; */
+}
+
+.image {
+    /* background-color: transparent;
+    width: 400px;
+    margin-left: 70px;
+    height: 180px;
+    position: absolute;
+    padding: 24px;
+    cursor: pointer; */
+}
+
+
+/* 
+.image-bottom-right {
+    margin-top: 80px;
+    margin-left: 800px;
+} */
+
+.card:hover {
+    transform: scale(1.1);
+    /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.vl {
+    border-left: 0.5px solid white;
+    height: 685px;
+    position: absolute;
+    left: 47%;
+    margin-left: -3px;
+    top: 20%;
+}
+
+.botonn {
+    font-size: 300px;
+    color: greenyellow;
+    margin-top: 80px;
+    margin-left: 750px;
+    position: absolute;
+}
+
+.date {
+    font-size: 30px;
+    color: #ffffff;
+    margin-top: 800px;
+    margin-left: 150px;
+    position: absolute;
+}
+
+.insert-ticket {
+    font-size: 45px;
+    color: #ffffff;
+    margin-top: -350px;
+    margin-left: -190px;
+    position: absolute;
+}
+
+.service {
+    font-size: 25px;
+    color: #ffffff;
+    margin-top: -165px;
+    margin-left: -190px;
+    position: absolute;
+}
+
+.checkIn {
+    font-size: 25px;
+    color: #ffffff;
+    margin-top: 250px;
+    margin-left: 40px;
+    position: absolute;
+    border-top: 4px solid white;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.checkOut {
+    font-size: 25px;
+    color: #ffffff;
+    margin-top: 290px;
+    margin-left: 40px;
+    position: absolute;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.estancia {
+    font-size: 25px;
+    color: #ffffff;
+    margin-top: 320px;
+    margin-left: 40px;
+    position: absolute;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.subtotal {
+    font-size: 25px;
+    color: #ffffff;
+    margin-top: 350px;
+    margin-left: 40px;
+    position: absolute;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.descuento {
+    font-size: 25px;
+    color: #ffffff;
+    margin-top: 380px;
+    margin-left: 40px;
+    position: absolute;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.total {
+    font-size: 25px;
+    color: #ffffff;
+    margin-top: 410px;
+    margin-left: 40px;
+    position: absolute;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.monto-ingresado {
+    font-size: 25px;
+    color: #ffffff;
+    margin-top: 440px;
+    margin-left: 40px;
+    position: absolute;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+table.cobro,
+td.cobro-td,
+th.cobro-th {
+    border-top: 1px solid #ddd;
+    font-size: 30px;
+    text-align: center;
+    color: white;
+}
+
+table.cobro {
+    border-collapse: collapse;
+    position: absolute;
+    margin-top: 180px;
+    margin-left: 55px;
+    width: 38%;
+}
+
+th.cobro-th,
+td.cobro-td {
+    padding: 20px;
+}
+
+table.total-cobro {
+    border-top: 1px solid #004d40;
+    font-size: 30px;
+    text-align: center;
+    color: white;
+    border-collapse: collapse;
+    position: absolute;
+    margin-top: 650px;
+    margin-left: 55px;
+    width: 38%;
+    background-color: #00695c;
+}
+
+td.total-cobro-td,
+th.total-cobro-th {
+    border-top: 1px solid #004d40;
+    padding: 20px;
+}
+
+tr.total-cobro-tr:nth-child(even) {
+    background-color: #009688;
+}
+
+
+/*DL17*/
+
+.tabs {
+    /* position: relative;
+    min-height: 940px;
+    clear: both;
+    margin: 25px 0; */
+}
+
+.tab {
+    float: left;
+}
+
+.tab label {
+    background: #eee;
+    padding: 15px;
+    position: relative;
+    /* left: 340px; */
+    border-radius: 10px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.tab [type="radio"] {
+    display: none;
+}
+
+.content {
+    /* position: absolute;
+    top: 28px;
+    left: 0;
+    background: transparent;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    overflow: hidden; */
+}
+
+.content>* {
+    opacity: 0;
+    /* transform: translateX(100%);
+    transition: all 1s ease; */
+}
+
+[type="radio"]:checked~label {
+    background: white;
+    border-bottom: 1px solid white;
+    z-index: 2;
+}
+
+[type="radio"]:checked~label~.content {
+    z-index: 1;
+}
+
+[type="radio"]:checked~label~.content>* {
+    opacity: 1;
+    transform: translateX(0);
+}

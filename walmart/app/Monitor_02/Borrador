@@ -1,0 +1,231 @@
+
+
+
+
+
+
+
+    def status_Borrar(self):
+
+        self.TON[10].actualizar()
+        if self.TON[10].salida:
+            #print ("SE HABILITO*******************************************")
+            self.M[0]=1
+
+        self.TON[10].entrada = False
+        self.TON[10].actualizar()
+
+        if self.M[0]==1:
+
+            
+            print ("EJECUTAR ENABLE_COIN")
+            self.M[0]=0
+            self.enable_coin()
+            
+            
+
+        if self.M[0]==0:
+            print ("EJECUTAR POLL")
+            #self.poll()
+            self.aceptarMonedas()
+        
+        self.TON[10].entrada = True
+        self.TON[10].actualizar()
+
+
+
+
+
+    def aceptarMonedas_Borrar(self):
+        #global cp,cambio,tarifa,aux_cambio,aux,rep,ser,aux_tarifa,killbill
+        rep = 0
+        a = self.comunicacion.crearInstruccion(Comunicacion.PROCESO, Comunicacion.MDB_DATOS_INCLUIR_CHECKSUM, [0x0B, 1])
+        self.puerto.write(a);
+        time.sleep(.05)
+        r = self.puerto.read(6)
+        self.verficarTramaDeDatos(r)
+
+        print("mo",r)
+        if(r):
+            
+
+            # Metodo para determinar las monedas
+            if ((r[0] >> 7) == 1):# monedas dispensadas manualmente
+                print ("Se dispenso una moneda")
+                #print (0x0F&r[0])
+            elif ((r[0] >> 6) == 1):# monedas depositadas manualmente
+                a = (r[0]>> 4) & 0x03
+                print ("Se depositó una moneda",  "{0:08b}".format(r[0]), "{0:03d}".format((r[0]>>4) & 0x03), "{0:03d}".format((r[0]>> 4)), "{0:03d}".format(r[1]))
+                
+                
+
+
+
+
+
+
+
+            elif (r[0] > 0 and r[0]<=0x0F):# señal de estatus
+                print ("*****************************************", r[0])
+                if(r[0]==1):
+                    status="Escrow request --- 1"
+                if(r[0]==2):
+                    status="Entregaando cambio : "+str(aux_cambio)
+                if(r[0]==3):
+                    status="No credit --- 3"
+                if(r[0]==4):
+                    status="Defective tube sensor --- 4"
+                if(r[0]==5):
+                    status="Double arrival --- 5"
+                if(r[0]==6):
+                    status="Aceptor unplugged --- 6"
+                if(r[0]==7):
+                    status="Tube Jam --- 7"
+                if(r[0]==8):
+                    status="Checksum Error --- 8"
+                if(r[0]==9):
+                    #status=""
+                    ms="Coin routing Error --- 9"
+                if(r[0]==10):
+                    status="Changer Busy --- 10"
+
+                if(r[0]==11):
+                    status = "El monedero fue reseteado"
+
+
+                if(r[0]==12):
+                    status="Coin Jam in the acceptance path --- 12"
+                if(r[0]==13):
+                    status="Posible credited coin removal --- 13"
+                print(status)
+
+
+
+
+
+
+        """
+
+
+
+            print("A")
+            if(r.__sizeof__() > 18):
+                print("B")
+                if (r[0] == 11):
+                    a = self.comunicacion.crearInstruccion(Comunicacion.PROCESO, Comunicacion.MDB_DATOS, [0x00, 0])
+                    self.puerto.write(a);
+
+                    
+                elif(r[0] != 0 and r[0] !=11 and r[0]!=2 and r.__sizeof__() > 18):
+                    print("C")
+                    print(r)
+                    a = self.comunicacion.crearInstruccion(Comunicacion.PROCESO, Comunicacion.MDB_DATOS, [0x00, 0])
+                    self.puerto.write(a);
+                    if (rep == 0):
+                        print("D")
+                        self.palPoll(r[0], r)
+
+                        #cambio = total - aux_tarifa
+                        #aux_cambio=cambio
+                        #count(ser,estadoConexion)
+
+                        rep = 0
+                        #rep=1
+                if (r[0] == 0):
+                    rep = 0
+        """
+        """
+        a = self.comunicacion.crearInstruccion(Comunicacion.PROCESO, Comunicacion.MDB_DATOS, [0x0A, 1, 0x0A, 0])
+        self.puerto.write(a);
+        time.sleep(.05)
+        r = self.puerto.read(6)
+        print("mo>>",r)                    
+
+        a = self.comunicacion.crearInstruccion(Comunicacion.PROCESO, Comunicacion.MDB_DATOS, [0 , 0])
+        self.puerto.write(a);
+        """
+
+    def palPoll_Borrar(self, r1,r):
+        #global cambiaColor,total,tarifa,cambio,rep,monedas,monedasTotal,dineroTotal,avis,aux_cambio,monedasPago
+        entregadas=0
+        tipoMoneda=0
+        valorMoneda=0
+        status=""
+        if (128&r1 == 0 and 64&r1 != 0):
+            if(32&r1==0 and 16&r1==0):
+                print("ruta: Caja")
+            elif (32 & r1 == 0 and 16 & r1 != 0):
+                print("ruta: Tubos")
+            elif (32 & r1 != 0 and 16 & r1 == 0):
+                print("ruta: Sin uso")
+            elif (32 & r1 != 0 and 16 & r1 != 0):
+                print("ruta: Retornada")
+
+        else:
+
+            print ("*****************************************", r1)
+            if(r1==1):
+                status="Escrow request --- 1"
+            if(r1==2):
+                status="Entregaando cambio : "+str(aux_cambio)
+            if(r1==3):
+                status="No credit --- 3"
+            if(r1==4):
+                status="Defective tube sensor --- 4"
+            if(r1==5):
+                status="Double arrival --- 5"
+            if(r1==6):
+                status="Aceptor unplugged --- 6"
+            if(r1==7):
+                status="Tube Jam --- 7"
+            if(r1==8):
+                status="Checksum Error --- 8"
+            if(r1==9):
+                #status=""
+                ms="Coin routing Error --- 9"
+            if(r1==10):
+                status="Changer Busy --- 10"
+
+            if(r1==11):
+                print ("Estatus")
+
+            if(r1==12):
+                status="Coin Jam in the acceptance path --- 12"
+            if(r1==13):
+                status="Posible credited coin removal --- 13"
+            print(status)
+            avis=status
+            return
+        b=8
+        while (b != 0):
+            if (b & r1 != 0):
+                tipoMoneda+=b
+            b=b>>1
+        """            
+        if(tipoMoneda==2):
+            valorMoneda=1
+            monedas[0]=monedas[0]+1
+            monedasPago[0]=monedasPago[0]+1
+        if (tipoMoneda == 3):
+            valorMoneda = 2
+            monedas[1]=monedas[1]+1
+            monedasPago[1]=monedasPago[1]+1
+        if (tipoMoneda == 4):
+            valorMoneda = 5
+            monedas[2]=monedas[2]+1
+            monedasPago[2]=monedasPago[2]+1
+        if (tipoMoneda == 5):
+            valorMoneda = 10
+            monedas[3]=monedas[3]+1
+            monedasPago[3]=monedasPago[3]+1
+        print("Moneda insertada: ",valorMoneda)
+
+        #cambiaColor=1
+        #print("Monedas en tubo: ",r2)
+        total=total+valorMoneda
+        dineroTotal=dineroTotal+valorMoneda
+        monedasTotal=monedasTotal+1
+        print("Monto actual: ",total)
+        """
+
+

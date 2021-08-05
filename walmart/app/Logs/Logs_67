@@ -1,0 +1,31 @@
+[2020-03-13]
+14:21:10.035871 iniciando cobro...
+14:21:14.303215 Datos Operacion: 60,1,2019-06-21 10:30:12 
+14:21:14.341630 Monto cobrado: 120 
+14:21:14.351926 Monedas recibidas: 0:0 
+14:21:14.367294 Billetes recibidos: 0:0 
+14:21:14.393442 Cambio solicitado: 0 
+14:21:14.439784 Cambio entregado (Monedas): 0:0 
+14:21:14.517089 Cambio entregado (Billetes): 0:0 
+14:21:14.552897 Intentos realizados: 0 
+14:21:14.601222 Registro interno exitoso60,1,'2020-03-13 14:21:14 5 
+14:21:25.464050 iniciando cobro...
+14:21:28.514761 Datos Operacion: 60,1,2019-06-21 10:30:12 
+14:21:28.557231 Monto cobrado: 120 
+14:21:28.583234 Monedas recibidas: 0:0 
+14:21:28.613942 Billetes recibidos: 0:0 
+14:21:28.649751 Cambio solicitado: 0 
+14:21:28.686307 Cambio entregado (Monedas): 0:0 
+14:21:28.702482 Cambio entregado (Billetes): 0:0 
+14:21:28.728363 Intentos realizados: 0 
+14:21:28.823471 Registro interno exitoso60,1,'2020-03-13 14:21:28 5 
+14:21:35.372831 iniciando cobro...
+14:21:40.263802 Datos Operacion: 60,1,2019-06-21 10:30:12 
+14:21:40.285169 Monto cobrado: 120 
+14:21:40.310966 Monedas recibidas: 0:0 
+14:21:40.341545 Billetes recibidos: 0:0 
+14:21:40.372231 Cambio solicitado: 0 
+14:21:40.397694 Cambio entregado (Monedas): 0:0 
+14:21:40.443603 Cambio entregado (Billetes): 0:0 
+14:21:40.500232 Intentos realizados: 0 
+14:21:40.564790 Registro interno exitoso60,1,'2020-03-13 14:21:40 5 

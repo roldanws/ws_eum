@@ -1,0 +1,11 @@
+[2020-03-13]
+13:19:09.230281 iniciando cobro...
+13:19:23.540111 Datos Operacion: 60,1,2019-06-21 10:30:12 
+13:19:23.566243 Monto cobrado: 120 
+13:19:23.591841 Monedas recibidas: 0:0 
+13:19:23.622389 Billetes recibidos: 0:0 
+13:19:23.663611 Cambio solicitado: 0 
+13:19:23.699544 Cambio entregado (Monedas): 0:0 
+13:19:23.745876 Cambio entregado (Billetes): 0:0 
+13:19:23.766370 Intentos realizados: 0 
+13:19:23.851465 Registro interno exitoso60,1,'2020-03-13 13:19:23 5 

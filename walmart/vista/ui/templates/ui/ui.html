@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="colorlib.com">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="{% static 'ui/images/logo_transparent.png' %}" sizes="16x16">
+    <title>EUM</title>
+    <link rel="stylesheet" href="{% static 'ui/css/style.css' %}">
+
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+
+    <div class="">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#ticket">ticket</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#expedidora">expedidora</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#i">i</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!-- Pestaña de inertar ticket -->
+            <div id="ticket" class=" tab-pane fade active"><br>
+                <div class=" text-center tab-content ">
+                    <div id="ticket" class="tab-pane active"><br>
+                        <div class="row ">
+                            <div class="col-6 ">
+                                <div class="card menu-card m-5 mx-auto" onclick="opcionPresionada(1)">
+                                    <div class="row h-100  ">
+                                        <div class="col-6">
+                                            <img src="{% static 'ui/images/services.png' %}" class="card-img-top " alt="">
+                                        </div>
+
+                                        <div class="col-4 vertical-center">
+                                            <div class="card-body ">
+                                                <h5 class="card-title  ">Recarga</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-2  vertical-center ">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" name="op1" id="op1" checked>
+                                                <label class="custom-control-label" for="op1">. </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 ">
+                                <a class="btn  " href="{% url 'ui:recarga' %}">
+                                    <i class="fa fa-money fa-3x" style="color:white; width:100px ; "></i>
+                                </a>
+                                <a class="btn  " href="/admin">
+                                    <i class="fa fa-cog fa-3x" style="color:white"></i>
+                                </a>
+
+                            </div>
+                        </div>
+
+                        <div class="row ">
+
+
+                            <div class="col-6">
+                                <div class="card menu-card mx-auto" onclick="opcionPresionada(2)">
+                                    <div class="row">
+                                        <div class="col-6 ">
+                                            <img src="{% static 'ui/images/services.png' %}" class="card-img-top" alt="">
+                                        </div>
+                                        <div class="col-4  vertical-center ">
+                                            <div class="card-body">
+                                                <h5 class="card-title ">Servicios</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-2  vertical-center ">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" name="op2" id="op2">
+                                                <label class="custom-control-label" for="op2">. </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 ">
+                                <div class="vl "></div>
+                                <div class="image image-bottom-right">
+                                    <h1 class="insert-ticket">Inserte Ticket</h1>
+                                    <div class="insert-ticket-description">Pago de estacionamiento</div>
+                                </div>
+                            </div>
+                            <div class="col-4  class=">
+                                <img src="{% static 'ui/images/insertar_ticket.gif' %}" class="img-responsive" alt="">
+                            </div>
+                        </div>
+
+                        <div class="row ">
+                            <div class="col-6">
+                                <div class="card menu-card m-5 mx-auto" onclick="opcionPresionada(3)">
+                                    <div class="row">
+                                        <div class="col-6 ">
+                                            <img src="{% static 'ui/images/services.png' %}" class="card-img-top" alt="">
+                                        </div>
+                                        <div class="col-4  vertical-center ">
+                                            <div class="card-body">
+                                                <h5 class="card-title ">Mas operaciones</h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-2  vertical-center ">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" name="op3" id="op3">
+                                                <label class="custom-control-label" for="op3">. </label>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row ">
+                            <div class="col-12 ">
+                                <div class="insert-ticket-description">Jueves 20 de Noviembre 13:00:23</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Pestaña de cobro -->
+
+            <div id="cobro" class=" tab-pane fade text-center"><br>
+                <div class="row ">
+                    <div class="col-6 ">
+                        <ul class="list-group list-group-flush vertical-center  m-5 mx-auto">
+                            <li class="list-group-item bg-transparent border-bottom border-white">
+                                <div class="row ">
+                                    <div class="col-6 ">
+                                        <h5>Hora de ingreso:</h5>
+                                    </div>
+                                    <div class="col-6 ">
+                                        <h5>
+                                            --
+                                        </h5>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item bg-transparent border-bottom border-white">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h5>
+                                            Tiempo estacionado:
+                                        </h5>
+                                    </div>
+                                    <div class="col-6">
+                                        <h5>
+                                            --
+                                        </h5>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item bg-transparent border-bottom border-white">
+                                <div class="row ">
+                                    <div class="col-6 ">
+                                        <h4>
+                                            Descuento:
+                                        </h4>
+                                    </div>
+                                    <div class="col-6 ">
+                                        <h4>
+                                            --
+                                        </h4>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="col-6 ">
+                        <a class="btn  " href="{% url 'ui:recarga' %}">
+                            <i class="fa fa-money fa-3x" style="color:white; width:100px ; "></i>
+                        </a>
+                        <a class="btn  " href="/admin">
+                            <i class="fa fa-cog fa-3x" style="color:white"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="row ">
+
+
+                    <div class="col-6">
+                        <div class="card-body text-white  bg-transparent m-5">
+                            <h5 class="card-title">Tarifa</h5>
+                            <p class="card-text">Las 2 primeras horas $5 con boleto sellado <br>Hora o fraccion adicional $10</p>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="col-2 ">
+                        <div class="vl "></div>
+                        <div class="image image-bottom-right">
+                            <h1 class="insert-ticket">Inserte dinero</h1>
+                            <div class="insert-ticket-description">Solo billetes de 100,50,20</div>
+                        </div>
+                    </div>
+                    <div class="col-4  class=">
+                        {% if 0 %}
+                        <i class="fa fa-heart fa-5x text-success mt-5" aria-hidden="true"></i> {% else %}
+                        <img src="{% static 'ui/images/insertar_billete.gif' %}" class="img-responsive" alt=""> {% endif %}
+
+                    </div>
+                </div>
+
+                <div class="row ">
+                    <div class="col-6">
+                        <div class="card bg-transparent card-info-dinero  text-center vertical-center  m-5 mx-auto border border-success ">
+                            <div class="row">
+                                <div class="col-6  ">
+                                    <div class="card-header bg-success">
+                                        <h2 class="card-title">A depositar</h2>
+                                    </div>
+                                </div>
+                                <div class="col-4  vertical-center ">
+                                    <div class="card-body ">
+                                        <h5 class="card-title  ">--</h5>
+                                    </div>
+                                </div>
+
+                                <div class="col-2  vertical-center ">
+
+                                </div>
+
+                                <div class="col-6 ">
+                                    <div class="card-header bg-success">
+                                        <h2 class="card-title">Depositado</h2>
+                                    </div>
+                                </div>
+                                <div class="col-4  vertical-center ">
+                                    <div class="card-body">
+                                        <h5 class="card-title ">--</h5>
+                                    </div>
+                                </div>
+                                <div class="col-2  vertical-center ">
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-6  vertical-center ">
+                        <a href="{% url 'ui:cancelacion' %}" class="btn btn-outline-danger mt-5" role="button" aria-pressed="true">Cancelar pago</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 ">
+                        <div class="insert-ticket-description">Jueves 20 de Noviembre 13:00:23</div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Pestaña de Recarga -->
+            <div id="recarga" class=" tab-pane fade"><br>
+                <div class="row ">
+                    <div class="col-12">
+                        <ul class="list-group list-group-flush vertical-center  m-5 mx-auto">
+                            <li class="list-group-item bg-transparent border-bottom border-white">
+                                <div class="row ">
+                                    <div class="col-6 ">
+                                        <h5>$1:</h5>
+                                    </div>
+                                    <div class="col-6 ">
+                                        <h5>--</h5>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item bg-transparent border-bottom border-white">
+                                <div class="row ">
+                                    <div class="col-6 ">
+                                        <h5>$2:</h5>
+                                    </div>
+                                    <div class="col-6 ">
+                                        <h5>--</h5>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item bg-transparent border-bottom border-white">
+                                <div class="row ">
+                                    <div class="col-6 ">
+                                        <h5>$5:</h5>
+                                    </div>
+                                    <div class="col-6 ">
+                                        <h5>--</h5>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item bg-transparent border-bottom border-white">
+                                <div class="row ">
+                                    <div class="col-6 ">
+                                        <h5>$10:</h5>
+                                    </div>
+                                    <div class="col-6 ">
+                                        <h5>--</h5>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item bg-transparent border-bottom border-white">
+                                <div class="row ">
+                                    <div class="col-6 ">
+                                        <h5>$20:</h5>
+                                    </div>
+                                    <div class="col-6 ">
+                                        <h5>--</h5>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item bg-transparent border-bottom border-white">
+                                <div class="row ">
+                                    <div class="col-6 ">
+                                        <h5>$50:</h5>
+                                    </div>
+                                    <div class="col-6 ">
+                                        <h5>--</h5>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item bg-transparent border-bottom border-white">
+                                <div class="row ">
+                                    <div class="col-6 ">
+                                        <h5>$100:</h5>
+                                    </div>
+                                    <div class="col-6 ">
+                                        <h5>--</h5>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="row ">
+                    <div class="col-6 text-center mt-5">
+
+                        <a class="btn  " href="/admin">
+                            <h1 class="text-danger">Reiniciar valores</h1>
+                            <i class="fa fa-cog fa-3x" style="color:white"> </i>
+                        </a>
+
+                    </div>
+                    <div class="col-6 text-center mt-5">
+                        <a class="btn  " href="{% url 'ui:recarga' %}">
+                            <h1 class="text-success">Confirmar</h1>
+                            <i class="fa fa-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     fa-3x"
+                                style="color:white; width:100px ; "> </i>
+                        </a>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <!-- Pestaña de Punto de cobro -->
+            <div id="punto_cobro" class=" tab-pane fade"><br>
+                <div class="row ">
+                    <div class="col-6">
+                        <div class="card menu-card m-5 mx-auto" onclick="opcionPresionada(1)">
+                            <div class="row ">
+
+                                <div class="col-6">
+                                    <img src="{% static 'ui/images/services.png' %}" class="card-img-top " alt="">
+                                </div>
+                                <div class="col-4 vertical-center">
+                                    <div class="card-body ">
+                                        <h5 class="card-title  ">Recarga</h5>
+                                    </div>
+                                </div>
+                                <div class="col-2  vertical-center ">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" name="op1" id="op1" checked>
+                                        <label class="custom-control-label" for="op1">. </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card menu-card m-5 mx-auto" onclick="opcionPresionada(1)">
+                            <div class="row ">
+
+                                <div class="col-6">
+                                    <img src="{% static 'ui/images/services.png' %}" class="card-img-top " alt="">
+                                </div>
+                                <div class="col-4 vertical-center">
+                                    <div class="card-body ">
+                                        <h5 class="card-title  ">Recarga</h5>
+                                    </div>
+                                </div>
+                                <div class="col-2  vertical-center ">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" name="op1" id="op1" checked>
+                                        <label class="custom-control-label" for="op1">. </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card menu-card m-5 mx-auto" onclick="opcionPresionada(1)">
+                            <div class="row ">
+
+                                <div class="col-6">
+                                    <img src="{% static 'ui/images/services.png' %}" class="card-img-top " alt="">
+                                </div>
+                                <div class="col-4 vertical-center">
+                                    <div class="card-body ">
+                                        <h5 class="card-title  ">Recarga</h5>
+                                    </div>
+                                </div>
+                                <div class="col-2  vertical-center ">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" name="op1" id="op1" checked>
+                                        <label class="custom-control-label" for="op1">. </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card menu-card m-5 mx-auto" onclick="opcionPresionada(1)">
+                            <div class="row ">
+
+                                <div class="col-6">
+                                    <img src="{% static 'ui/images/services.png' %}" class="card-img-top " alt="">
+                                </div>
+                                <div class="col-4 vertical-center">
+                                    <div class="card-body ">
+                                        <h5 class="card-title  ">Recarga</h5>
+                                    </div>
+                                </div>
+                                <div class="col-2  vertical-center ">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" name="op1" id="op1" checked>
+                                        <label class="custom-control-label" for="op1">. </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card menu-card m-5 mx-auto" onclick="opcionPresionada(1)">
+                            <div class="row ">
+
+                                <div class="col-6">
+                                    <img src="{% static 'ui/images/services.png' %}" class="card-img-top " alt="">
+                                </div>
+                                <div class="col-4 vertical-center">
+                                    <div class="card-body ">
+                                        <h5 class="card-title  ">Recarga</h5>
+                                    </div>
+                                </div>
+                                <div class="col-2  vertical-center ">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" name="op1" id="op1" checked>
+                                        <label class="custom-control-label" for="op1">. </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card menu-card m-5 mx-auto" onclick="opcionPresionada(1)">
+                            <div class="row ">
+
+                                <div class="col-6">
+                                    <img src="{% static 'ui/images/services.png' %}" class="card-img-top " alt="">
+                                </div>
+                                <div class="col-4 vertical-center">
+                                    <div class="card-body ">
+                                        <h5 class="card-title  ">Recarga</h5>
+                                    </div>
+                                </div>
+                                <div class="col-2  vertical-center ">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" name="op1" id="op1" checked>
+                                        <label class="custom-control-label" for="op1">. </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-6 ">
+                        <a class="btn  " href="{% url 'ui:recarga' %}">
+                            <i class="fa fa-money fa-3x" style="color:white; width:100px ; "></i>
+                        </a>
+                        <a class="btn  " href="/admin">
+                            <i class="fa fa-cog fa-3x" style="color:white"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Pestaña de expedidora -->
+            <div id="expedidora" class=" tab-pane fade active"><br>
+                <div class=" text-center tab-content ">
+                    <div id="expedidora" class="tab-pane active"><br>
+                        <div class="row ">
+                            <div class="col-5 ">
+                                <div id="presencia" class="card menu-card m-5 mx-auto" onclick="opcionPresionada(1)" style="background-color:white">
+                                    <div class=" row h-100 ">
+                                        <div class="col-6 vertical-center card-img-top ">
+                                            <a class="btn " href="{% url 'ui:recarga' %} ">
+                                                <i class="fa fa-circle fa-5x " style="color:rgb(59, 138, 228); "></i>
+                                            </a>
+                                        </div>
+
+                                        <div class="col-6 vertical-center ">
+                                            <div class="card-body ">
+                                                <h4 class="card-title ">Presencia</h4>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-7 ">
+                                <a class="btn " href="{% url 'ui:recarga' %} ">
+                                    <i class="fa fa-money fa-3x " style="color:white; width:100px ; "></i>
+                                </a>
+                                <a class="btn " href="/admin ">
+                                    <i class="fa fa-cog fa-3x " style="color:white "></i>
+                                </a>
+
+                            </div>
+                        </div>
+
+                        <div class="row ">
+                            <div class="col-5 ">
+                                <div id="boton_ticket" class="card menu-card mx-auto " onclick="opcionPresionada(2)" style="background-color:white">
+                                    <div class=" row ">
+                                        <div class="col-6 vertical-center card-img-top ">
+                                            <a class="btn " href="{% url 'ui:recarga' %} ">
+                                                <i class="fa fa-circle fa-5x " style="color:red; "></i>
+                                            </a>
+                                        </div>
+                                        <div class="col-6 vertical-center ">
+                                            <div class="card-body ">
+                                                <h4 class="card-title ">Boton ticket</h4>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 ">
+                                <div class="vl "></div>
+                                <div class="image image-bottom-right ">
+                                    <h1 class="insert-ticket "> Tome su boleto</h1>
+                                    <div class="insert-ticket-description ">Presione el boton</div>
+                                </div>
+                            </div>
+                            <div class="col-4 class=">
+                                <img id="img_secuencia_expedicion" src=" {% static 'ui/images/expedir_ticket.gif' %} " class="img-responsive " alt=" ">
+                            </div>
+                        </div>
+
+                        <div class="row ">
+                            <div class="col-5 ">
+                                <div id="retorno" class="card menu-card m-5 mx-auto " onclick="opcionPresionada(3) " style="background-color:white">
+                                    <div class=" row ">
+                                        <div class="col-6 vertical-center card-img-top ">
+                                            <a class="btn " href="{% url 'ui:recarga' %} ">
+                                                <i class="fa fa-circle fa-5x " style="color:yellow "></i>
+                                            </a>
+                                        </div>
+                                        <div class="col vertical-center ">
+                                            <div class="card-body ">
+                                                <h4 class="card-title ">Retorno</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row ">
+                            <div class="col-12 ">
+                                <div class="insert-ticket-description ">Jueves 20 de Noviembre 13:00:23</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Pestaña de i -->
+
+            <div id="i" class="tab-pane active text-center"><br>
+                <div class="row ">
+                    <div class="col-5 ">
+                        <div id="ph" class="card menu-card mb-5  mx-auto" onclick="opcionPresionada(1)" style="background-color:white">
+                            <div class=" row h-100 ">
+                                <div class="col col-lg-6 col-12  vertical-center card-img-top p-0 ">
+                                    <a class="btn " href="{% url 'ui:recarga' %} ">
+                                        <i class="fa fa-flask fa-5x " style="color:red; "></i>
+                                    </a>
+                                </div>
+
+
+
+                                <div class="col col-lg-6 col-12 vertical-center pb-0 ">
+                                    <h4 id="sensor-ph" class="card-title ">6.5</h4>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-7 text-right pr-5">
+
+                        <a class="btn " href="/admin ">
+                            <i class="fa fa-cog fa-3x " style="color:white "></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="row ">
+                    <div class="col-5 ">
+                        <div id="ec" class="card menu-card mb-5  mx-auto " onclick="opcionPresionada(2)" style="background-color:white">
+                            <div class=" row h-100">
+                                <div class="col col-lg-6 col-12  vertical-center card-img-top p-0">
+                                    <a class="btn " href="{% url 'ui:recarga' %} ">
+                                        <i class="fa fa-heartbeat fa-5x " style="color:rgb(94, 218, 63); "></i>
+                                    </a>
+                                </div>
+                                <div class="col col-lg-6 col-12 vertical-center ">
+                                    <div class="card-body ">
+                                        <h4 id="sensor-ec" class="card-title ">1020</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col col-lg-3 col-3">
+                        <div class="vl "></div>
+                        <div class="image image-bottom-right ">
+                            <h1 id="sensor-nivel" class="insert-ticket "> 33%</h1>
+                            <div class="insert-ticket-description ">Nivel del tanque</div>
+                        </div>
+                    </div>
+                    <div class="col col-lg-4 col-4 class=">
+                        <img id="img_secuencia_expedicion" src=" https://image.flaticon.com/icons/svg/1954/1954974.svg  " class="img-responsive " alt=" ">
+                    </div>
+                </div>
+
+                <div class="row ">
+                    <div class="col-5 ">
+                        <div id="temperatura" class="card menu-card  mx-auto " onclick="opcionPresionada(3) " style="background-color:white">
+                            <div class=" row h-100 ">
+                                <div class="col col-lg-6 col-12  vertical-center card-img-top p-0">
+                                    <a class="btn " href="{% url 'ui:recarga' %} ">
+                                        <i class="fa fa-thermometer-half fa-5x " style="color:yellow "></i>
+                                    </a>
+                                </div>
+                                <div class="col col-lg-6 col-12 vertical-center ">
+                                    <div class="card-body ">
+                                        <h4 id="sensor-temperatura" class="card-title ">24° C.</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row ">
+                    <div class="col-12 ">
+                        <div class="insert-ticket-description ">Jueves 20 de Noviembre 13:00:23</div>
+                        <div class="insert-ticket-description ">Dia #23 del tramtamiento</div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- <script src="{% static 'ui/vendor/jquery/jquery.min.js' %} "></script>
+    <script src="{% static 'ui/vendor/jquery-validation/dist/jquery.validate.min.js' %} "></script>
+    <script src="{% static 'ui/vendor/jquery-validation/dist/additional-methods.min.js' %} "></script>
+    <script src="{% static 'ui/vendor/jquery-steps/jquery.steps.min.js' %} "></script> -->
+    <script src="{% static 'ui/js/main.js' %} "></script>
+    <script src="{% static 'ui/js/ws2.js' %} "></script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+<!-- <div id="tabs " class="tabs ">
+        <div id="tab-1 " class="tab ">
+            <input type="radio " id="tab-4 " name="tab-group-2 ">
+            <label id="t1 " for="tab-4 ">Cajero</label>
+            <div class="content ">
+                <div class="container ">
+                    <div class="row ">
+                        <div class="col ">
+                            <div class="card " style="width: 18rem; ">
+                                <img src="{% static 'ui/images/services.png' %} " class="card-img-top " alt=" ">
+                                <div class="card-body ">
+                                    <h5 class="card-title ">Servicio</h5>
+                                    <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="# " class="btn btn-primary ">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col ">
+                            <div class="vl "></div>
+                            <div class="image image-bottom-right ">
+                                <img src="{% static 'ui/images/insertar_ticket.gif' %} " alt=" " style="height:350px; ">
+                                <p class="insert-ticket ">Inserte<br/>Ticket</p>
+                                <p class="service ">Pago de <br/>Estacionamiento</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="card card-upper ">
+                        <img src="{% static 'ui/images/services.png' %} " alt=" ">
+                        <h2 style="margin-top:45px ">Servicios</h2>
+                    </div>
+                    <div class="card card-middle ">
+                        <img src="{% static 'ui/images/card.png' %} " alt=" ">
+                        <h2 style="margin-top:25px ">Recarga de Tarjeta</h2>
+                    </div>
+                    <div class="card card-bottom ">
+                        <img src="{% static 'ui/images/consulta.png' %} " alt=" " style="height:105px; float: left; margin-top:15px; margin-left:20px ">
+                        <h2 style="margin-top:45px ">Consultar</h2>
+                    </div>
+                    <div class="vl "></div>
+                    <div class="image image-bottom-right ">
+                        <img src="{% static 'ui/images/insertar_ticket.gif' %} " alt=" " style="height:350px; ">
+                        <p class="insert-ticket ">Inserte<br/>Ticket</p>
+                        <p class="service ">Pago de <br/>Estacionamiento</p>
+                    </div>
+                    <div class="card-not-ticket ">
+                        Sin Ticket
+                    </div>
+                    <a href="{% url 'ui:recarga' %} " class="link " style="color:red ">
+                        Recarga/
+                    </a>
+                    <a href="/admin " class="link " style="color:red ">
+                        Admin
+                    </a>
+                    <p class="date ">14:29, 23 de marzo de 2019</p>
+                </div>
+            </div>
+        </div>
+        <div id="tab-2 " class="tab ">
+            <input type="radio " id="tab-5 " name="tab-group-2 ">
+            <label for="tab-5 ">Cobro</label>
+            <div class="content ">
+                <div class="container ">
+                    <div>
+                        <img src="{% static 'ui/images/logo_transparent.png' %} " alt=" " style="height:150px; float: left ">
+                    </div>
+                    <table class="cobro ">
+                        <tr>
+                            <td class="cobro-td ">Ingreso</td>
+                            <td id="hora_entrada " class="cobro-td ">14:20:00</td>
+                        </tr>
+                        <tr>
+                            <td class="cobro-td ">Estancia</td>
+                            <td id="tiempo_estacionado " class="cobro-td ">00:40:00</td>
+                        </tr>
+                        <tr>
+                            <td class="cobro-td ">Descuento</td>
+                            <td id="descuento " class="cobro-td ">$ 0.00</td>
+                        </tr>
+                    </table>
+                    <table class="total-cobro ">
+                        <tr class="total-cobro-tr ">
+                            <td class="total-cobro-td ">Total</td>
+                            <td id="monto_ingresar " class="total-td ">$ 20.00</td>
+                        </tr>
+                        <tr class="total-cobro-tr ">
+                            <td class="total-cobro-td ">Ingresado</td>
+                            <td id="monto_ingresado " class="ingresado-td ">$ 10.00</td>
+                        </tr>
+                    </table>
+                    <div class="vl "></div>
+                    <div class="image image-bottom-right ">
+                        <img src="{% static 'ui/images/cajero-con-billete.gif' %} " alt=" " style="height:350px; ">
+                        <p class="insert-ticket ">Inserte<br/>Dinero</p>
+                        <p class="service ">Pago de <br/>Estacionamiento</p>
+                    </div>
+
+                    <a href="{% url 'ui:cancelacion' %} " class="link ">
+                        <div class="panel-footer ">
+                            <span class="pull-left "> Cancelar Pago</span>
+                            <span class="pull-right "><i class="fa fa-arrow-circle-right "></i></span>
+                            <div class="clearfix "></div>
+                        </div>
+                    </a>
+
+                    <div id="monto_ingresado " class="card-not-ticket " }>
+                        Cambio: 0
+                    </div>
+                    <p class="date ">14:29, 23 de marzo de 2019</p>
+                </div>
+            </div>
+        </div>
+        <div id="tab-3 " class="tab ">
+            <input type="radio " id="tab-6 " name="tab-group-2 ">
+            <label for="tab-6 ">Cobro</label>
+            <div class="content ">
+                <div class="container ">
+                    <div>
+                        <img src="{% static 'ui/images/logo_transparent.png' %} " alt=" " style="height:150px; float: left ">
+                    </div>
+                    <table class="cobro ">
+                        <tr>
+                            <td class="cobro-td ">Ingreso...</td>
+                            <td id="hora_entrada " class="cobro-td ">14:20:00</td>
+                        </tr>
+                        <tr>
+                            <td class="cobro-td ">Estancia...</td>
+                            <td id="tiempo_estacionado " class="cobro-td ">00:40:00</td>
+                        </tr>
+                        <tr>
+                            <td class="cobro-td ">Descuento...</td>
+                            <td id="descuento " class="cobro-td ">$ 0.00</td>
+                        </tr>
+                    </table>
+                    <table class="total-cobro ">
+                        <tr class="total-cobro-tr ">
+                            <td class="total-cobro-td ">Total...</td>
+                            <td id="monto_ingresar " class="total-td ">$ 20.00</td>
+                        </tr>
+                        <tr class="total-cobro-tr ">
+                            <td class="total-cobro-td ">Ingresado...</td>
+                            <td id="monto_ingresado " class="ingresado-td ">$ 10.00</td>
+                        </tr>
+                    </table>
+                    <div class="vl "></div>
+                    <div class="image image-bottom-right ">
+                        <img src="{% static 'ui/images/cajero-con-billete.gif' %} " alt=" " style="height:500px; ">
+                        <p class="insert-ticket ">Inserte<br/>Dinero</p>
+                        <p class="service ">Pago de <br/>Estacionamiento</p>
+                    </div>
+
+                    <a href="{% url 'ui:cancelacion' %} " class="link ">
+                        <div class="panel-footer ">
+                            <span class="pull-left "> Cancelar Pago</span>
+                            <span class="pull-right "><i class="fa fa-arrow-circle-right "></i></span>
+                            <div class="clearfix "></div>
+                        </div>
+                    </a>
+
+                    <div id="monto_ingresado " class="card-not-ticket " }>
+                        Cambio: 0
+                    </div>
+                    <p class="date ">14:29, 23 de marzo de 2019</p>
+                </div>
+            </div>
+        </div> 
+    </div> -->

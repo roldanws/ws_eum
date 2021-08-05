@@ -1,0 +1,9 @@
+[Unit]
+Description=Servidor Django para despliegue de vistas y base de datos
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /usr/share/eum/vista/vista.sh
+
+[Install]
+WantedBy=multi-user.target
