@@ -265,6 +265,198 @@ class registroBoletoApiView(APIView):
             }
         return Response(content)
 
+
+
+class registroTransaccionApiView(APIView):
+    """
+    A view that returns the count of active users in JSON.
+    """
+    #Ejemplo : http://127.0.0.1:8000/api/consultaBoleto/?idboleto=12050821140000557201&te=001&tr=0001&tda=5572
+    renderer_classes = [JSONRenderer]
+    def post(self, request, format=None):
+        #idBoleto = self.request.GET.get('idboleto') 
+        no_provedor = self.request.data.get('registroTransaccion').get('no_provedor') 
+        det_estacionamiento = self.request.data.get('registroTransaccion').get('det_estacionamiento') 
+        folio_boleto = self.request.data.get('registroTransaccion').get('folio_boleto') 
+        entrada = self.request.data.get('registroTransaccion').get('entrada') 
+        fecha_pago = self.request.data.get('registroTransaccion').get('fecha_pago') 
+        codigo = self.request.data.get('registroTransaccion').get('codigo') 
+        registrado = self.request.data.get('registroTransaccion').get('registrado') 
+        tda = self.request.data.get('registroTransaccion').get('tienda') 
+        monto = self.request.data.get('registroTransaccion').get('monto') 
+        cambio = self.request.data.get('registroTransaccion').get('cambio') 
+        monedas = self.request.data.get('registroTransaccion').get('monedas') 
+        billetes = self.request.data.get('registroTransaccion').get('billetes') 
+        cambio_entregado = self.request.data.get('registroTransaccion').get('cambio_entregado') 
+        print("folio:  , tienda: ",folio_boleto,tda)
+        if 1:
+            tienda = Tienda.objects.filter(id_tienda=tda,activo=True)
+            print("Tienda:",tienda)
+            if tienda:
+                pass
+            else:
+                content = {
+                'registroBoleto':{
+                'idBoleto': folio_boleto,
+                'codigoError': "04",
+                'descripcionError': "Cobro NO habilitado para esta tienda",
+                }
+                }
+                return Response(content)
+                
+            fechahora_pago = datetime.strptime(fecha_pago, '%d-%m-%Y %H:%M:%S')  
+            print("fecha_hora: ",fechahora_pago)
+            print("entrada",entrada)       
+        
+            equipo = Equipo.objects.filter(id=1)
+            folio = Boleto.objects.filter(folio_boleto=folio_boleto)
+            transaccion = Transaccion.objects.create(     no_provedor=no_provedor,
+                                                det_estacionamiento=det_estacionamiento,
+                                                fecha_pago=fechahora_pago,
+                                                expedidor_boleto=entrada,
+                                                codigo=codigo,
+                                                registrado=registrado,
+                                                equipo_id=equipo[0],
+                                                folio_boleto=folio[0],
+                                                monto=monto,
+                                                cambio=cambio,
+                                                monedas=monedas,
+                                                billetes=billetes,
+                                                cambio_entregado=cambio_entregado,
+                                                #tienda_id=tienda[0],
+                                                )
+            
+            if transaccion:
+                print("Se encontro:",transaccion)
+                #print("Monto: ", boleto[0].monto)
+                #monto = boleto[0].monto
+                #codigo = boleto[0].codigo
+                content = {
+                    'registroTransaccion':{
+                    'codigo': 1,
+                    'codigoError': "00",
+                    'descripcionError': "Registro exitoso",
+                    }
+                }
+            else:
+                content = {
+                'registroTransaccion':{
+                'folio': folio_boleto,
+                'codigoError': "02",
+                'descripcionError': "Boleto NO encontrado",
+                }
+                
+                }
+                print("No se encontro:",transaccion)
+        else: #except
+            print("Error al extraer datos")
+            content = {
+                'registroBoleto':{
+                'folio': folio_boleto,
+                'codigoError': "01",
+                'descripcionError': "Inconsistencia de datos",
+                }
+                
+            }
+        return Response(content)
+
+class consultaTransaccionEumApiView(APIView):
+    """
+    A view that returns the count of active users in JSON.
+    """
+    #Ejemplo : http://127.0.0.1:8000/api/consultaBoleto/?idboleto=12050821140000557201&te=001&tr=0001&tda=5572
+    renderer_classes = [JSONRenderer]
+    def post(self, request, format=None):
+        #idBoleto = self.request.GET.get('idboleto') 
+        folio = self.request.data.get('consultaTransaccionEum').get('folio_boleto') 
+        entrada = self.request.data.get('consultaTransaccionEum').get('entrada') 
+        fecha_pago = self.request.data.get('consultaTransaccionEum').get('fecha_pago') 
+        tda = self.request.data.get('consultaTransaccionEum').get('tienda') 
+        print("folio:  , tienda: ",folio,tda)
+        if 1:
+            tienda = Tienda.objects.filter(id_tienda=tda,activo=True)
+            print("Tienda:",tienda)
+            if tienda:
+                pass
+            else:
+                content = {
+                'consultaTransaccionEum':{
+                'codigo': 4,
+                'descripcionError': "Cobro NO habilitado para esta tienda",
+                }
+                }
+                return Response(content)
+                
+            
+            
+            
+            fechahora_pago = datetime.strptime(fecha_pago, '%d-%m-%Y %H:%M:%S')  
+            
+
+            print("fecha_hora: ",fechahora_pago)
+            print("entrada",entrada)       
+        
+            transaccion = Transaccion.objects.filter(fecha_pago=fechahora_pago,expedidor_boleto=entrada)
+
+            if transaccion:
+                print("Se encontro:",transaccion)
+                #print("Monto: ", boleto[0].monto)
+                proveedor = transaccion[0].no_provedor
+                codigo = transaccion[0].codigo
+                registrado = transaccion[0].registrado
+                monto = transaccion[0].monto
+                cambio = transaccion[0].cambio
+                monedas = transaccion[0].monedas
+                billetes = transaccion[0].billetes
+                cambio_entregado = transaccion[0].cambio_entregado
+                folio = transaccion[0].folio_boleto.id
+                equipo = transaccion[0].equipo_id.id
+
+                boleto = Boleto.objects.filter(id=folio)
+                folio_boleto = boleto[0].folio_boleto
+
+                content = {
+                    'consultaTransaccionEum':{
+                    "no_provedor": proveedor,
+                    'fecha_pago': fecha_pago,
+                    'expedidor_boleto': entrada,
+                     'codigo': codigo,
+                     "registrado": registrado,
+                    "monto": monto,
+                    "cambio": cambio,
+                    "monedas": monedas,
+                    "billetes": billetes,
+                    "cambio_entregado": cambio_entregado,
+                    'folio_boleto': folio_boleto,
+                    "equipo_id": equipo,
+                    'descripcion_codigo': "Pago encontrado",
+                    }
+
+                    
+                }
+            else:
+                content = {
+                'consultaTransaccionEum':{
+                'folio': folio,
+                'codigo': 0,
+                'descripcionError': "Pago NO encontrado",
+                }
+                
+                }
+                print("No se encontro:",transaccion)
+        else: #except
+            print("Error al extraer datos")
+            content = {
+                'consultaTransaccionEum':{
+                'folio': folio,
+                'codigo': 0,
+                'descripcionError': "Inconsistencia de datos",
+                }
+                
+            }
+        return Response(content)
+
+
 class consultaBoletoEumApiView(APIView):
     """
     A view that returns the count of active users in JSON.

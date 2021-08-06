@@ -70,7 +70,7 @@ class Transaccion(models.Model):
     folio_boleto = models.OneToOneField(Boleto, verbose_name = 'Folio boleto', related_name='get_transaccion', on_delete = models.CASCADE, null=True, blank=True)
 
     no_provedor = models.CharField(max_length=200, verbose_name = 'Proveedor')
-    fecha_expedicion_boleto = models.DateTimeField(verbose_name = 'Fecha de expedicion boleto', default = now)
+    fecha_pago = models.DateTimeField(verbose_name = 'Fecha de pago', default = now)
     det_estacionamiento = models.CharField(max_length=200, verbose_name = 'Determinante estacionamiento')
     expedidor_boleto = models.IntegerField(verbose_name='Expedidor boleto')
     codigo = models.IntegerField(verbose_name='Codigo')
