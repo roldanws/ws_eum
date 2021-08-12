@@ -8,6 +8,8 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
 from django.views.generic.list import ListView
 from .Calculador import Calculador
+from django.utils.timezone import now
+
 
 # Create your views here.
 class CorteApiView(APIView):
@@ -66,10 +68,10 @@ class consultaBoletoApiView(APIView):
     renderer_classes = [JSONRenderer]
     def post(self, request, format=None):
         #idBoleto = self.request.GET.get('idboleto') 
-        idBoleto = self.request.data.get('consultaBoletoRequest').get('idBoleto') 
-        te = self.request.data.get('consultaBoletoRequest').get('te') 
-        tr = self.request.data.get('consultaBoletoRequest').get('tr') 
-        tda = self.request.data.get('consultaBoletoRequest').get('tda')
+        idBoleto = self.request.data.get('consultaBoleto').get('idBoleto') 
+        te = self.request.data.get('consultaBoleto').get('te') 
+        tr = self.request.data.get('consultaBoleto').get('tr') 
+        tda = self.request.data.get('consultaBoleto').get('tda')
         #idBoleto2 = self.request.data.get('consultaBoletoRequest').get('idBoleto')
         #print("idboleto222", idBoleto2)
         exitosos = 0
@@ -112,13 +114,18 @@ class consultaBoletoApiView(APIView):
             sec = datetime.strptime("01:00:31", '%H:%M:%S')
             fechahora_boleto = datetime.strptime(str(fecha_boleto)+" "+str(hora_boleto), '%d-%m-%y %H:%M:%S')  
             
-            monto = calculador.calcular_tarifa(str(fecha_boleto),str(hora_boleto),0)
-
+            fecha_actual = datetime.now().strftime('%d-%m-%y')
+            hora_actual = datetime.now().strftime('%H:%M:%S')
+            resultado = calculador.calcular_tarifa(str(fecha_actual),str(hora_actual),str(fecha_boleto),str(hora_boleto),0)
+            monto = resultado [0]
+            #monto = resultado [0]
             print("fecha_hora: ",fechahora_boleto)
             print("entrada",entrada)       
         
             #transaccion = Transaccion.objects.filter(fecha_expedicion_boleto=fechahora_boleto,expedidor_boleto=entrada)
-            boleto = Boleto.objects.filter(fecha_expedicion_boleto=fechahora_boleto,entrada=entrada)
+            print("hoal")
+            print(datetime.today(),type(str(datetime.today())),fechahora_boleto)
+            boleto = Boleto.objects.filter(fecha_expedicion_boleto=fechahora_boleto,entrada=entrada).update(updated=str(datetime.today()))
             
 
             """
@@ -532,15 +539,15 @@ class consultaBoletoEumApiView(APIView):
             }
         return Response(content)
 
-class notiBoletoPagadoRequestApiView(APIView):
+class notiBoletoPagadoApiView(APIView):
     #Ejemplo : http://127.0.0.1:8000/api/consultaBoleto/?idboleto=12020821130000557201&te=001&tr=0001&tda=5572
     renderer_classes = [JSONRenderer]
     def post(self, request, format=None):
         #idBoleto = self.request.GET.get('idboleto') 
-        idBoleto = self.request.data.get('consultaBoletoRequest').get('idBoleto') 
-        te = self.request.data.get('consultaBoletoRequest').get('te') 
-        tr = self.request.data.get('consultaBoletoRequest').get('tr') 
-        tda = self.request.data.get('consultaBoletoRequest').get('tda')
+        idBoleto = self.request.data.get('notiBoletoPagado').get('idBoleto') 
+        te = self.request.data.get('notiBoletoPagado').get('te') 
+        tr = self.request.data.get('notiBoletoPagado').get('tr') 
+        tda = self.request.data.get('notiBoletoPagado').get('tda')
         #idBoleto2 = self.request.data.get('consultaBoletoRequest').get('idBoleto')
         #print("idboleto222", idBoleto2)
         exitosos = 0
@@ -551,20 +558,27 @@ class notiBoletoPagadoRequestApiView(APIView):
         print("idBoleto:  , tienda: ",idBoleto,tda)
         #print("Proveedor: ",idBoleto[0:2])
         #print("Dia: ",idBoleto[2:4])
-        
-        try:
+        calculador = Calculador()
+        if 1: #try
             tienda = Tienda.objects.filter(id_tienda=tda,activo=True)
             print("Tienda:",tienda)
             if tienda:
                 pass
             else:
                 content = {
-                'consultaBoleto':{
-                'idBoleto': idBoleto,
-                'codigoError': "04",
-                'descripcionError': "Cobro NO habilitado para esta tienda",
+                "consultaBoleto": {
+                "idBoleto": "",
+                "impresionPantalla": "Gracias por su compra",
+                "impresionTicket": "Compre Walmart",
+                "monto": "",
+                "codRepuesta": "01",
+                "codigoError": "04",
+                "descripcionError": "COBRO NO HABILITADO PARA ESTA TIENDA",
+                "numAutorizacion": "123456"
                 }
                 }
+
+                
                 return Response(content)
                 
             
@@ -578,30 +592,84 @@ class notiBoletoPagadoRequestApiView(APIView):
             segundo_boleto = idBoleto[12:14]
             det_estacionamiento = idBoleto[14:18]
             entrada = idBoleto[18:20]
+            fecha_boleto_amd_walmart =  dia_boleto + "/" + mes_boleto + "/" + anio_boleto
+            hora_boleto_walmart = hora_boleto + ":" + minuto_boleto
+            fecha_actual = datetime.now().strftime('%d/%m/%y')
+            hora_actual = datetime.now().strftime('%H:%M')
+            print("Hora y fecha actual:", fecha_actual, hora_actual)
+
+
             fecha_boleto = dia_boleto + "-" + mes_boleto + "-" + anio_boleto
             hora_boleto = hora_boleto + ":" + minuto_boleto + ":" + segundo_boleto
             sec = datetime.strptime("01:00:31", '%H:%M:%S')
             fechahora_boleto = datetime.strptime(str(fecha_boleto)+" "+str(hora_boleto), '%d-%m-%y %H:%M:%S')        
-            print("fecha_hora: ",fechahora_boleto)
-            print("entrada",entrada)       
+            #print("fecha_hora: ",fechahora_boleto)
+            #print("entrada",entrada)       
         
+            
+            boleto = Boleto.objects.filter(fecha_expedicion_boleto=fechahora_boleto,entrada=entrada)
             #transaccion = Transaccion.objects.filter(fecha_expedicion_boleto=fechahora_boleto,expedidor_boleto=entrada)
-            equipo = Equipo.objects.filter(id=1)
-            transaccion = Transaccion.objects.create(no_provedor=10,
-                                                fecha_expedicion_boleto=fechahora_boleto,
-                                                det_estacionamiento="0001",
-                                                expedidor_boleto=1,
-                                                codigo=1,
-                                                registrado=True,
-                                                monto=10,
-                                                cambio=10,
-                                                monedas="0:0",
-                                                billetes="1:1",
-                                                cambio_entregado="2:5",
-                                                equipo_id=equipo[0],
-                                                )
-            if transaccion:
-                print("Se encontro:",transaccion)
+
+
+            
+            
+            if boleto:
+                fecha_consulta = datetime.strftime(boleto[0].updated.date(), '%d-%m-%y')
+                fecha_consulta_walmart = datetime.strftime(boleto[0].updated.date(), '%d/%m/%y')  
+                hora_consulta = boleto[0].updated.time()
+                #print("FECHA consulta:", fecha_consulta)
+
+                #print("hora consulta", str(hora_consulta)[:8], str(fecha_consulta))
+                #monto = calculador.calcular_tarifa(str(fecha_boleto),str(hora_boleto),0)
+                
+                resta = calculador.restar_hora(str(hora_consulta)[:8], str(fecha_consulta))
+                #print("resta", resta)
+                dias = resta[0]
+                segundos = resta[1]
+                minutos_transcurridos_consulta = int(segundos/60)
+                if dias:
+                    minutos_transcurridos_consulta += dias*1440
+                #print("minutos totales: {}".format(minutos_transcurridos_consulta))
+                print("Minutos transcurridos desde consulta de boleto:", minutos_transcurridos_consulta)
+                print("FECHASS:", fecha_consulta,fecha_boleto)
+                resultado = calculador.calcular_tarifa(str(fecha_consulta), str(hora_consulta)[:8], str(fecha_boleto),str(hora_boleto),0)
+                print("RESULTADO:",resultado)
+                """asr = asr
+                dias = resultado[0]
+                segundos = resultado[1]
+                minutos_transcurridos_expedido = int(segundos/60)
+                if dias:
+                    minutos_transcurridos_expedido += dias*1440
+                """
+                monto_resultado = resultado[0]
+                minutos_transcurridos_expedido = resultado[1]
+                print("Tiempo transcurrido desde creacion de boleto:", minutos_transcurridos_expedido)
+
+                if minutos_transcurridos_consulta > 14:
+                    content = {
+                    "notiBoletoPagado": {
+                        "idBoleto": idBoleto,
+                        "impresionPantalla": "Gracias por su compra",
+                        "impresionTicket": "Compre Walmart",
+                        "fechaEntrada": fecha_boleto_amd_walmart,
+                        "horaEntrada": hora_boleto_walmart,
+                        "fechaCobro": str(fecha_consulta_walmart),
+                        "horaCobro": str(hora_consulta)[:6],
+                        "duracion": str(minutos_transcurridos_expedido)+" min",
+                        "codRepuesta": "00",
+                        "codigoError": "05",
+                        "descripcionError": "Tiempo agotado Escanea boleto nuevamente",
+                        "montoNuevo": float(monto_resultado),
+                        "tiempoAdicional": "10 min",
+                        "numAutorizacion": "246801"
+                    }
+                }
+                    return Response(content)
+
+
+                print("Se encontro:",boleto)
+                
+                """
                 monto = transaccion[0].monto
                 codigo = transaccion[0].codigo
                 fecha_entrada = transaccion[0].fecha_expedicion_boleto.date().strftime("%d/%m/%y")
@@ -609,6 +677,7 @@ class notiBoletoPagadoRequestApiView(APIView):
                 print("Monto: ", transaccion[0].monto)
                 print("Fecha entrada: ", fecha_entrada, type(fecha_entrada))
                 print("Hora entrada: ", hora_entrada)
+                """
 
                 
                 content = {
@@ -616,39 +685,49 @@ class notiBoletoPagadoRequestApiView(APIView):
                         "idBoleto": idBoleto,
                         "impresionPantalla": "Gracias por su compra",
                         "impresionTicket": "Compre Walmart",
-                        "fechaEntrada": "28/04/21",
-                        "horaEntrada": "08:06",
-                        "fechaCobro": "28/04/21",
-                        "horaCobro": "08:30",
-                        "duracion": "26 min",
-                        "codRepuesta": codigo,
-                        "codigoError": "05",
-                        "descripcionError": "Tiempo agotado Escanea boleto nuevamente",
-                        "montoNuevo": "120.00",
-                        "tiempoAdicional": "10 min",
+                        "fechaEntrada": fecha_boleto_amd_walmart,
+                        "horaEntrada": hora_boleto_walmart,
+                        "fechaCobro": str(fecha_consulta_walmart),
+                        "horaCobro": str(hora_consulta)[:6],
+                        "duracion": str(minutos_transcurridos_expedido)+" min",
+                        "codRepuesta": "00",
+                        "codigoError": "00",
+                        "descripcionError": "",
+                        "montoNuevo": "",
+                        "tiempoAdicional": "",
                         "numAutorizacion": "246801"
                     }
                 }
             else:
                 content = {
-                'consultaBoleto':{
-                'idBoleto': idBoleto,
-                'codigoError': "02",
-                'descripcionError': "Boleto NO valido",
+                "consultaBoleto": {
+                "idBoleto": idBoleto,
+                "impresionPantalla": "Gracias por su compra",
+                "impresionTicket": "Compre Walmart",
+                "monto": "",
+                "codRepuesta": "01",
+                "codigoError": "02",
+                "descripcionError": "BOLETO NO VALIDO",
+                "numAutorizacion": "123456"
                 }
                 
                 }
-                print("No se encontro:",transaccion)
-        except:
+                print("No se encontro:",boleto)
+        else: #except
             print("Error al extraer datos")
             content = {
-                'consultaBoleto':{
-                'idBoleto': idBoleto,
-                'codigoError': "01",
-                'descripcionError': "Inconsistencia de datos",
+                "consultaBoleto": {
+                "idBoleto": idBoleto,
+                "impresionPantalla": "Gracias por su compra",
+                "impresionTicket": "Compre Walmart",
+                "monto": "",
+                "codRepuesta": "01",
+                "codigoError": "02",
+                "descripcionError": "BOLETO NO VALIDO.",
+                "numAutorizacion": "123456"
                 }
                 
-            }
+                }
         return Response(content)
 
 

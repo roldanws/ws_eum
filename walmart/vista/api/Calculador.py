@@ -19,7 +19,7 @@ class Calculador:
         self.tarifa = ""
         self.descuento = ""
         
-    def calcular_tarifa(self,fecha_ingreso,hora_ingreso, descuento):
+    def calcular_tarifa(self,fecha_a,hora_a,fecha_ingreso,hora_ingreso, descuento):
         #-------------------- Seleccionar tarifa y extraer datos --------------------#
 
         tarifa = Tarifa.objects.filter(descuento=descuento)
@@ -36,7 +36,7 @@ class Calculador:
             self.descuento = monto_base
 
             #-------------------- Calcular tiempo estacionado en minutos --------------------#
-            resta = self.restar_hora(hora_ingreso,fecha_ingreso)
+            resta = self.restar_horas(hora_a,fecha_a,hora_ingreso,fecha_ingreso)
             dias = resta[0]
             segundos = resta[1]
             tiempo_estacionado = int(segundos/60)
@@ -60,15 +60,38 @@ class Calculador:
                 self.monto_ingresar = monto_total
                 print("Fracciones: ",fracciones_de_tiempo)
                 print("Monto a ingresar: ",self.monto_ingresar)
-                return monto_total
+                return monto_total,tiempo_estacionado
 
     def restar_hora(self,horab,fechab):
         horab = horab.split(':',2)
         fechab = fechab.split('-')
-        fechaBoleto = datetime.strptime(str(fechab[0]) + str(fechab[1]) + str(fechab[2]), '%Y%m%d').date()
+        fechaBoleto = datetime.strptime(str(fechab[0]) + str(fechab[1]) + str(fechab[2]), '%d%m%y').date()
         horaBoleto = datetime.strptime(str(horab[0]) +':'+str(horab[1]) +':'+ str(horab[2]), '%H:%M:%S').time()
         fechaActual=datetime.now().date()
         horaActual=datetime.now().time()
+        horayFechaBoleto = datetime.now().combine(fechaBoleto, horaBoleto)
+        horayFechaActual = datetime.now().combine(fechaActual, horaActual)
+        #print("Hora y fecha Actual: ",horayFechaActual)
+        restaFechas = horayFechaActual - horayFechaBoleto
+        aux_dif=(str(restaFechas).split('.',1))[0]
+        dias = int(restaFechas.days)
+        segundos = restaFechas.seconds 
+        return dias,segundos,aux_dif
+
+    def restar_horas(self,hora_a,fecha_a,horab,fechab):
+        # fechaActual = fecha_a
+        # fechaBoleto = fecha_b
+        print(hora_a,fecha_a,horab,fechab)
+        horab = horab.split(':',2)
+        fechab = fechab.split('-')
+        hora_a = hora_a.split(':',2)
+        fecha_a = fecha_a.split('-')
+        fechaBoleto = datetime.strptime(str(fechab[0]) + str(fechab[1]) + str(fechab[2]), '%d%m%y').date()
+        horaBoleto = datetime.strptime(str(horab[0]) +':'+str(horab[1]) +':'+ str(horab[2]), '%H:%M:%S').time()
+        fechaActual= datetime.strptime(str(fecha_a[0]) + str(fecha_a[1]) + str(fecha_a[2]), '%d%m%y').date()
+        horaActual= datetime.strptime(str(hora_a[0]) +':'+str(hora_a[1]) +':'+ str(hora_a[2]), '%H:%M:%S').time()
+        #fechaActual=datetime.now().date()
+        #horaActual=datetime.now().time()
         horayFechaBoleto = datetime.now().combine(fechaBoleto, horaBoleto)
         horayFechaActual = datetime.now().combine(fechaActual, horaActual)
         restaFechas = horayFechaActual - horayFechaBoleto
