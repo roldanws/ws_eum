@@ -48,10 +48,10 @@ INSTALLED_APPS = [
     'recurso',
     'servidores',
     'transaccion',
-    'ui',
+    #'ui',
     #'channels',
     'core',
-    'crispy_forms',
+    #'crispy_forms',
 ]
 
 MIDDLEWARE = [
