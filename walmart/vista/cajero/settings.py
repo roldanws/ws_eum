@@ -39,17 +39,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api',
     'alertas',
-    'chat_app',
+    #'chat_app',
     'controladora',
     'dispositivos',
     'equipo',
-    'hook',
+    #'hook',
     'rest_framework',
     'recurso',
     'servidores',
     'transaccion',
     'ui',
-    'channels',
+    #'channels',
     'core',
     'crispy_forms',
 ]
@@ -154,14 +154,14 @@ REST_FRAMEWORK = {
 }
 
 
-
+"""
 CHANNEL_LAYERS = {
     'default' : {
         'BACKEND' : 'asgiref.inmemory.ChannelLayer',
         'ROUTING' : 'chat_app.routing.channel_routing',
     }
 }
-
+"""
 
 STATIC_URL = '/static/'
 
