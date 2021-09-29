@@ -27,7 +27,7 @@ class Inicio:
         self.status_code = ""
         self.response = ""
         self.lista_de_variables = ""
-        
+
         self.equipo = ""
         self.controladora = ""
         self.dispositivo = ""
@@ -51,18 +51,18 @@ class Inicio:
             equipo = Expedidora(variables)
             pass
 
-        
+
         #equipo.establecerControladora(self.controladora)
         #equipo.establecerTarifas(self.tarifa)
         #equipo.establecerSensores(self.sensor)
         #equipo.establecerDispositivos(self.dispositivo)
         #equipo.establecerVista(self.vista)
-        
+
         #if establecido:
         #    print("### -------------------------------Se establecio el tipo de equipo a: {}".format(self.equipo[0]['tipo']) )
         #else:
         #    print("### -------------------------------Ocurrio un error al establecer el tipo de equipo")
-        
+
         ### ------------------------------- Configurar Equipo
         ### ------------------------------- Configurar Vista
         ### ------------------------------- Configurar Tarifas
@@ -113,8 +113,8 @@ class Inicio:
 
 
         return 0
-       
-    
+
+
     def obtener_url(self,url):
         return self.url
     def obtener_encabezado(self,encabezado):
@@ -131,18 +131,18 @@ class Inicio:
 
     def establecer_lista_de_variables(self,lista_de_variables):
         self.lista_de_variables = lista_de_variables
-        
+
     def establecer_encabezados(self,encabezados):
         self.modo_operacion = modo_operacion
-        
+
     def enviar(self,tipo = 0, *args, **kargs):
         err = 0
         for item in args:
             #print (item)
             #for i, it in enumerate(item):
             #    print(i,it)
-        
-                
+
+
             if self.validar_datos(item):
                 self.datos = item
             else:
@@ -155,7 +155,7 @@ class Inicio:
             )
             if response.status_code != 200:
                 err = 1
-            
+
         elif self.metodo == 'POST':
             print("metodo POST: ",self.metodo)
             response = requests.post(
@@ -164,8 +164,8 @@ class Inicio:
             )
             if response.status_code != 201:
                 err = 1
-            
-            
+
+
         elif self.metodo == 'PUT':
             pass
         elif self.metodo == 'DELETE':
@@ -176,23 +176,23 @@ class Inicio:
 
         if err:
             print("Ocurrio un error:",response.status_code)
-        else: 
+        else:
             return self.response
 
-    
+
     def validar_datos(self,datos):
         if datos:
             return 1
-        else: 
+        else:
             return 0
 
 
 
-    
+
 
 def main():
     inicio =  Inicio()
-    
+
 if __name__ == "__main__":
     main()
 
