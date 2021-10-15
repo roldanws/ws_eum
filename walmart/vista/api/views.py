@@ -109,8 +109,8 @@ class consultaBoletoApiView(APIView):
 
             #Obtener datos
             proovedor = idBoleto[0:2]
-            dia_boleto = idBoleto[2:4]
-            mes_boleto = idBoleto[4:6]
+            mes_boleto = idBoleto[2:4]
+            dia_boleto = idBoleto[4:6]
             anio_boleto = idBoleto[6:8]
             hora_boleto = idBoleto[8:10]
             minuto_boleto = idBoleto[10:12]
@@ -243,8 +243,7 @@ class registroBoletoApiView(APIView):
         if 1:
             tienda = Tienda.objects.filter(id_tienda=tda,activo=True)
             print("Tienda:",tienda)
-            det_estacionamiento = idBoleto[14:18]
-            if (tienda and (tda == str(det_estacionamiento))):
+            if tienda:
                 pass
             else:
                 content = {
@@ -337,8 +336,7 @@ class registroTransaccionApiView(APIView):
         if 1:
             tienda = Tienda.objects.filter(id_tienda=tda,activo=True)
             print("Tienda:",tienda)
-            det_estacionamiento = idBoleto[14:18]
-            if (tienda and (tda == str(det_estacionamiento))):
+            if tienda:
                 pass
             else:
                 content = {
@@ -422,8 +420,7 @@ class consultaTransaccionEumApiView(APIView):
         if 1:
             tienda = Tienda.objects.filter(id_tienda=tda,activo=True)
             print("Tienda:",tienda)
-            det_estacionamiento = idBoleto[14:18]
-            if (tienda and (tda == str(det_estacionamiento))):
+            if tienda:
                 pass
             else:
                 content = {
@@ -520,8 +517,7 @@ class consultaBoletoEumApiView(APIView):
         if 1:
             tienda = Tienda.objects.filter(id_tienda=tda,activo=True)
             print("Tienda:",tienda)
-            det_estacionamiento = idBoleto[14:18]
-            if (tienda and (tda == str(det_estacionamiento))):
+            if tienda:
                 pass
             else:
                 content = {
@@ -627,8 +623,8 @@ class notiBoletoPagadoApiView(APIView):
 
             #Obtener datos
             proovedor = idBoleto[0:2]
-            dia_boleto = idBoleto[2:4]
-            mes_boleto = idBoleto[4:6]
+            mes_boleto = idBoleto[2:4]
+            dia_boleto = idBoleto[4:6]
             anio_boleto = idBoleto[6:8]
             hora_boleto = idBoleto[8:10]
             minuto_boleto = idBoleto[10:12]
@@ -876,8 +872,8 @@ class revBoletoPagadoApiView(APIView):
 
             #Obtener datos
             proovedor = idBoleto[0:2]
-            dia_boleto = idBoleto[2:4]
-            mes_boleto = idBoleto[4:6]
+            mes_boleto = idBoleto[2:4]
+            dia_boleto = idBoleto[4:6]
             anio_boleto = idBoleto[6:8]
             hora_boleto = idBoleto[8:10]
             minuto_boleto = idBoleto[10:12]
