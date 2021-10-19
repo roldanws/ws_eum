@@ -66,8 +66,9 @@ class Transaccion(models.Model):
         ("Servidor", "Servidor"),
     )
 
-    #folio_boleto = models.IntegerField(verbose_name='Folio boleto', null=True, blank=True)
-    folio_boleto = models.OneToOneField(Boleto, verbose_name = 'Folio boleto', related_name='get_transaccion', on_delete = models.CASCADE, null=True, blank=True)
+    #folio_boleto = models.OneToOneField(Boleto, verbose_name = 'Folio boleto', related_name='get_transaccion', on_delete = models.CASCADE, null=True, blank=True)
+
+    folio_boleto = models.ForeignKey(Boleto, verbose_name = 'Folio boleto', related_name='get_transaccion', on_delete = models.CASCADE, null=False, blank=False, default=28370)
 
     no_provedor = models.CharField(max_length=200, verbose_name = 'Proveedor')
     fecha_pago = models.DateTimeField(verbose_name = 'Fecha de pago', default = now)

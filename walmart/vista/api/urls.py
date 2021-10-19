@@ -2,7 +2,7 @@ from django.urls import path
 from django.conf.urls import url
 from django.contrib import admin
 from .views import CorteApiView,consultaBoletoApiView,consultaBoletoEumApiView,notiBoletoPagadoApiView,registroBoletoApiView,revBoletoPagadoApiView
-from .views import registroTransaccionApiView,consultaTransaccionEumApiView
+from .views import registroTransaccionApiView,consultaTransaccionEumApiView,consultarTransaccion
 
 app_name = 'admin_app'
 urlpatterns = [
@@ -14,5 +14,6 @@ urlpatterns = [
     path('registroBoleto/eum/', registroBoletoApiView.as_view(), name='registro_boleto'),
     path('notiBoletoPagadoRequest/', notiBoletoPagadoApiView.as_view(), name='notiBoletoPagado'),
     path('revBoletoPagadoRequest/', revBoletoPagadoApiView.as_view(), name='revBoletoPagado'),
+    path('consultaTransaccion2/eum/', consultarTransaccion.as_view(), name='consultar_transaccion'),
 
 ]

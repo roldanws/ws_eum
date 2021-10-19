@@ -11,6 +11,9 @@ from .Calculador import Calculador
 from django.utils.timezone import now
 import random
 
+#Vista consultarTransaccion2
+from rest_framework import serializers
+from .serializers import  BoletoSerializer, TransaccionSerializer
 
 # Create your views here.
 tiempo_tolerancia = 15
@@ -947,3 +950,71 @@ class revBoletoPagadoApiView(APIView):
 
 
 #@method_decorator(staff_member_required, name="dispatch")
+
+
+class consultarTransaccion(APIView):
+    def post(self, request):
+
+        contenido = {}
+
+        datos = self.request.data.get('consultarTransaccion')
+
+        folio    = datos.get('folio')
+        entrada  = datos.get('entrada')
+        fecha    = datos.get('fecha')
+        tienda   = datos.get('tienda')
+
+        print ('{}:  folio {}, entrada {}, fecha {}, tienda {}'
+            .format(self, folio, entrada, fecha, tienda))
+
+        # obtener id de la tienda
+        tienda = Tienda.objects.filter(id_tienda=tienda, activo=True)
+        print ('{}: tienda {}'.format(self, tienda))
+
+        if tienda:
+            idTienda  = tienda[0].id
+            print ('{}: tienda_id {}'.format(self, idTienda))
+
+            # obtenerBoleto
+            
+            boleto = Boleto.objects.filter(folio_boleto = folio,
+                                            entrada = entrada,
+                                            fecha_expedicion_boleto = fecha,
+                                            tienda_id = idTienda
+                                                )
+
+            if boleto:
+                # TODO: El corregir el modelo boleto ya que estos pueden no ser únicos
+                print ('{}: Boleto {}'.format(self, boleto))
+                idBoleto = boleto[0].id
+                print ('{}: Boleto {}'.format(self, idBoleto))
+
+                # obtener transacciones
+                transacciones = Transaccion.objects.filter(folio_boleto = idBoleto)
+                print ('{}: Transacciones : {}'.format(self, transacciones))
+                
+                if transacciones: 
+                    # TODO: Corregir modelo transacciones ya que unicamente admite una transacción
+                    print ('{}: Transacciones encontradas: {}'.format(self, transacciones))
+                    serializer = TransaccionSerializer(transacciones, many=True)
+                    return Response({'transacciones' : serializer.data})
+                else:
+                    contenido = {
+                        'mensaje': 'No se encontraron transacciones'
+                    }
+
+            else:
+                contenido = {
+                    'mensaje': 'No se encontro el boleto'
+                }
+
+        else:
+            contenido = {
+                'mensaje': 'No se encontro la tienda'
+            }
+        return Response({
+                'consultarTransaccion': contenido
+            } )
+
+    def __str__(self):
+        return "{} ".format( 'Transacciones'.ljust( 15 ) )
