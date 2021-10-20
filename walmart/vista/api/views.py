@@ -326,6 +326,7 @@ class registroTransaccionApiView(APIView):
         det_estacionamiento = self.request.data.get('registroTransaccion').get('det_estacionamiento')
         folio_boleto = self.request.data.get('registroTransaccion').get('folio_boleto')
         entrada = self.request.data.get('registroTransaccion').get('entrada')
+        fecha_expedicion = self.request.data.get('registroTransaccion').get('fecha_expedicion')
         fecha_pago = self.request.data.get('registroTransaccion').get('fecha_pago')
         codigo = self.request.data.get('registroTransaccion').get('codigo')
         registrado = self.request.data.get('registroTransaccion').get('registrado')
@@ -356,7 +357,7 @@ class registroTransaccionApiView(APIView):
             print("entrada",entrada)
 
             equipo = Equipo.objects.filter(id=1)
-            folio = Boleto.objects.filter(folio_boleto=folio_boleto)
+            folio = Boleto.objects.filter(folio_boleto = folio_boleto, fecha_expedicion_boleto = fecha_expedicion, entrada = entrada)
             transaccion = Transaccion.objects.create(     no_provedor=no_provedor,
                                                 det_estacionamiento=det_estacionamiento,
                                                 fecha_pago=fechahora_pago,
@@ -364,6 +365,7 @@ class registroTransaccionApiView(APIView):
                                                 codigo=codigo,
                                                 registrado=registrado,
                                                 equipo_id=equipo[0],
+                                                folio_boleto=folio_boleto,
                                                 folio_boleto=folio[0],
                                                 monto=monto,
                                                 cambio=cambio,
