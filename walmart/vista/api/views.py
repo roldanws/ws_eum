@@ -365,7 +365,6 @@ class registroTransaccionApiView(APIView):
                                                 codigo=codigo,
                                                 registrado=registrado,
                                                 equipo_id=equipo[0],
-                                                folio_boleto=folio_boleto,
                                                 folio_boleto=folio[0],
                                                 monto=monto,
                                                 cambio=cambio,
