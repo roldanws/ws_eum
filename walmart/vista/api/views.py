@@ -353,11 +353,12 @@ class registroTransaccionApiView(APIView):
                 return Response(content)
 
             fechahora_pago = datetime.strptime(fecha_pago, '%d-%m-%Y %H:%M:%S')
+            fechahora_expedicion = datetime.strptime(fecha_expedicion, '%d-%m-%Y %H:%M:%S')
             print("fecha_hora: ",fechahora_pago)
             print("entrada",entrada)
 
             equipo = Equipo.objects.filter(id=1)
-            folio = Boleto.objects.filter(folio_boleto = folio_boleto, fecha_expedicion_boleto = fecha_expedicion, entrada = entrada)
+            folio = Boleto.objects.filter(folio_boleto = folio_boleto, fecha_expedicion_boleto = fechahora_expedicion, entrada = entrada)
             transaccion = Transaccion.objects.create(     no_provedor=no_provedor,
                                                 det_estacionamiento=det_estacionamiento,
                                                 fecha_pago=fechahora_pago,
