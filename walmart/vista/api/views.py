@@ -710,7 +710,9 @@ class notiBoletoPagadoApiView(APIView):
             fecha_boleto_amd_walmart =  dia_boleto + "/" + mes_boleto + "/" + anio_boleto
             hora_boleto_walmart = hora_boleto + ":" + minuto_boleto
 
-            UTC = pytz.utc 
+            #UTC = pytz.utc 
+            #fecha_actual = datetime.now(UTC).strftime('%d/%m/%y')
+            #hora_actual = datetime.now(UTC).strftime('%H:%M')
             fecha_actual = datetime.now(UTC).strftime('%d/%m/%y')
             hora_actual = datetime.now(UTC).strftime('%H:%M')
             print("Hora y fecha actual:", fecha_actual, hora_actual)
@@ -794,6 +796,7 @@ class notiBoletoPagadoApiView(APIView):
                 }
                 return Response(content)
 
+                minutos_transcurridos_consulta = minutos_transcurridos_consulta + 300 #Forzando zona horaria UTC
                 if minutos_transcurridos_consulta > 14:
                     content = {
                     "notiBoletoPagado": {
