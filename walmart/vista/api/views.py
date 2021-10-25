@@ -169,6 +169,7 @@ class consultaBoletoApiView(APIView):
             print("fecha_hora: ",fechahora_boleto)
             print("entrada",entrada)
 
+
             #transaccion = Transaccion.objects.filter(fecha_expedicion_boleto=fechahora_boleto,expedidor_boleto=entrada)
             if tiempo_estacionado > tiempo_tolerancia:
                 pass
@@ -767,6 +768,28 @@ class notiBoletoPagadoApiView(APIView):
                 monto_resultado = resultado[0]
                 minutos_transcurridos_expedido = resultado[1]
                 print("Tiempo transcurrido desde creacion de boleto:", minutos_transcurridos_expedido)
+
+                content = {
+                    "notiBoletoPagado": {
+                        "idBoleto": idBoleto,
+                        "impresionPantalla": "Gracias por su compra",
+                        "impresionTicket": "Compre Walmart",
+                        "fechaEntrada": fecha_boleto_amd_walmart,
+                        "horaEntrada": hora_boleto_walmart,
+                        #"fechaCobro": str(fecha_consulta_walmart),
+                        #"horaCobro": str(hora_consulta)[:6],
+                        "fechaCobro": str(fecha_actual),
+                        "horaCobro": str(hora_actual),
+                        "duracion": str(minutos_transcurridos_expedido)+" min",
+                        "codRepuesta": "00",
+                        "codigoError": minutos_transcurridos_consulta,
+                        "descripcionError": "Tiempo agotado Escanea boleto nuevamente",
+                        "montoNuevo": float(monto_resultado),
+                        "tiempoAdicional": "10 min",
+                        "numAutorizacion": ""
+                }
+                }
+                return Response(content)
 
                 if minutos_transcurridos_consulta > 14:
                     content = {
