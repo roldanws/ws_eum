@@ -15,6 +15,7 @@ import random
 from rest_framework import serializers
 from .serializers import  BoletoSerializer, TransaccionSerializer
 
+import pytz
 # Create your views here.
 tiempo_tolerancia = 15
 class CorteApiView(APIView):
@@ -708,8 +709,10 @@ class notiBoletoPagadoApiView(APIView):
             entrada = idBoleto[18:20]
             fecha_boleto_amd_walmart =  dia_boleto + "/" + mes_boleto + "/" + anio_boleto
             hora_boleto_walmart = hora_boleto + ":" + minuto_boleto
-            fecha_actual = datetime.now().strftime('%d/%m/%y')
-            hora_actual = datetime.now().strftime('%H:%M')
+
+            UTC = pytz.utc 
+            fecha_actual = datetime.now(UTC).strftime('%d/%m/%y')
+            hora_actual = datetime.now(UTC).strftime('%H:%M')
             print("Hora y fecha actual:", fecha_actual, hora_actual)
 
 
