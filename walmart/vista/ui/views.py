@@ -3,8 +3,15 @@ from django.views.generic.base import TemplateView,RedirectView
 
 import requests,json
 
+from django.shortcuts import render, HttpResponse
+
 # Create your views here.
 cancelacion = 0
+
+def home(request):
+    return HttpResponse("<h1>PARKING TIP</h1><p>Estamos trabajando en el sitio</p>")
+
+    
 class UiPageView(TemplateView):
     template_name = "ui/ui.html"
 
