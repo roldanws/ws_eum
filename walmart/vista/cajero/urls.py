@@ -1,4 +1,4 @@
-"""cajero URL Configuration
+"""cajero URL Configurations
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.0/topics/http/urls/
@@ -23,14 +23,14 @@ from core.urls import core_patterns
 from django.conf import settings
 from django.conf.urls.static import static
 from .router import router
-from ui.urls import ui_patterns
+#from ui.urls import ui_patterns
 
 
 urlpatterns = [
     
     #path('', include(hook_patterns)),
-    path('', include(ui_patterns)),
-    path('', include(core_patterns)),
+    #path('', include(ui_patterns)),
+    #path('', include(core_patterns)),
     path('api/', include(router.urls), name = 'models'),
     path('api/', include('api.urls'), name = 'views'),
     
