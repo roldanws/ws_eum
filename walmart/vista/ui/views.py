@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from django.views.generic.base import TemplateView,RedirectView
 
-import requests,json
+#import requests,json
 
 from django.shortcuts import render, HttpResponse
 
