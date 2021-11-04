@@ -23,7 +23,7 @@ from core.urls import core_patterns
 from django.conf import settings
 from django.conf.urls.static import static
 from .router import router
-#from ui.urls import ui_patterns
+from ui.urls import ui_patterns
 
 
 urlpatterns = [
@@ -40,4 +40,3 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
