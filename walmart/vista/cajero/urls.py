@@ -30,6 +30,7 @@ urlpatterns = [
     #path('', include(hook_patterns)),
     #path('', include(urls.ui_patterns)),
     #path('', include(core_patterns)),
+    path('', include('ui.urls')),
     path('api/', include(router.urls), name = 'models'),
     path('api/', include('api.urls'), name = 'views'),
     
