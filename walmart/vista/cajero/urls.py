@@ -20,7 +20,7 @@ from django.urls import path, include
 #from ui import urls
 #from hook.urls import hook_patterns
 #from ui.urls import ui_patterns
-from core.urls import core_patterns
+#from core.urls import core_patterns
 from django.conf import settings
 from django.conf.urls.static import static
 from .router import router
