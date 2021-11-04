@@ -23,12 +23,13 @@ from core.urls import core_patterns
 from django.conf import settings
 from django.conf.urls.static import static
 from .router import router
+from ui.urls import ui_patterns
 
 
 urlpatterns = [
     
     #path('', include(hook_patterns)),
-    #path('', include(ui_patterns)),
+    path('', include(ui_patterns)),
     path('', include(core_patterns)),
     path('api/', include(router.urls), name = 'models'),
     path('api/', include('api.urls'), name = 'views'),
