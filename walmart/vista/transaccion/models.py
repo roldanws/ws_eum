@@ -36,7 +36,7 @@ class Boleto(models.Model):
     folio_boleto = models.IntegerField(verbose_name='Folio boleto')
     entrada = models.IntegerField(verbose_name='Numero de entrada')
     fecha_expedicion_boleto = models.DateTimeField(verbose_name = 'Fecha de expedicion boleto', default = now)
-    codigo = models.IntegerField(verbose_name='Codigo de registro')
+    estado = models.IntegerField(verbose_name='Estado', default = 1)
     registrado = models.BooleanField(verbose_name = 'Registrado', default = True)
     created = models.DateTimeField(verbose_name = 'Fecha creacion', default = now)
     updated = models.DateTimeField(auto_now=True, verbose_name = 'Ultima modificacion')

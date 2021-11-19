@@ -155,17 +155,27 @@ class consultaBoletoApiView(APIView):
             segundo_boleto = idBoleto[12:14]
             det_estacionamiento = idBoleto[14:18]
             entrada = idBoleto[18:20]
+
+            '''
+            - Obtener estado del boleto antes de calcular tarifa
+            - Estado 1 Sin previo pago: permitir realizar el pago
+            - Estado 2 Pagado: Realizar calculo de tiempo a partir del ultimo pago/transaccion registrada 
+                Nota: Se resuelven dos vistas pendientes en este paso
+            - Estado 3 Obsoleto: No permitir el pago
+            '''
+
             fecha_boleto = dia_boleto + "-" + mes_boleto + "-" + anio_boleto
             hora_boleto = hora_boleto + ":" + minuto_boleto + ":" + segundo_boleto
             sec = datetime.strptime("01:00:31", '%H:%M:%S')
             fechahora_boleto = datetime.strptime(str(fecha_boleto)+" "+str(hora_boleto), '%d-%m-%y %H:%M:%S')
+
+            
 
             fecha_actual = datetime.now().strftime('%d-%m-%y')
             hora_actual = datetime.now().strftime('%H:%M:%S')
             resultado = calculador.calcular_tarifa(str(fecha_actual),str(hora_actual),str(fecha_boleto),str(hora_boleto),0)
             monto = resultado [0]
             tiempo_estacionado = resultado [1]
-            #monto = resultado [0]
             print("fecha_hora: ",fechahora_boleto)
             print("entrada",entrada)
 
@@ -188,32 +198,26 @@ class consultaBoletoApiView(APIView):
                 return Response(content)
 
 
-            print("hoal")
-            print(datetime.today(),type(str(datetime.today())),fechahora_boleto)
-            boleto = Boleto.objects.filter(fecha_expedicion_boleto=fechahora_boleto,entrada=entrada).update(updated=str(datetime.today()))
 
             boleto = Boleto.objects.filter(fecha_expedicion_boleto=fechahora_boleto,entrada=entrada)
-            """
-            {
-            "id": 2,
-            "no_provedor": "09",
-            "fecha_expedicion_boleto": "2021-08-02T15:10:00Z",
-            "det_estacionamiento": "0001",
-            "expedidor_boleto": 1,
-            "codigo": 1,
-            "registrado": true,
-            "monto": 10,
-            "cambio": 10,
-            "monedas": "0:0",
-            "billetes": "1:1",
-            "cambio_entregado": "1:10",
-            "created": "2021-08-02T12:10:00Z",
-            "updated": "2021-08-05T14:51:15.759221Z",
-            "folio_boleto": 2,
-            "equipo_id": 1
-        }
-            """
+            
+            
             if boleto:
+
+                estado = boleto[0].estado
+                folio_boleto = boleto[0].id
+
+                if estado == 1:
+                    print("hoal")
+                    print(datetime.today(),type(str(datetime.today())),fechahora_boleto)
+                    Boleto.objects.filter(fecha_expedicion_boleto=fechahora_boleto,entrada=entrada).update(updated=str(datetime.today()))
+
+                elif estado == 2:
+                    transacciones = Transaccion.objects.filter(folio_boleto=folio_boleto)
+                    print("Transacciones:", transacciones)
+                    pass
+
+
                 print("Se encontro:",boleto)
                 print("Folio Boletoo:", boleto[0].folio_boleto,boleto[0].id)
 
@@ -817,9 +821,10 @@ class notiBoletoPagadoApiView(APIView):
 
 
                 try:
+                    fechahora_actual = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                     transaccion = Transaccion.objects.create(     no_provedor=proovedor,
                                                     det_estacionamiento=det_estacionamiento,
-                                                    fecha_pago=fechahora_consulta,
+                                                    fecha_pago=fechahora_actual,
                                                     expedidor_boleto=entrada,
                                                     codigo="2",
                                                     registrado=True,

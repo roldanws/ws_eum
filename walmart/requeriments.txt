@@ -1,6 +1,7 @@
-channels==1.1.8              
-dj-database-url
-Django==2.2.12             
+#channels==1.1.8              
+#dj-database-url
+#Django==2.2.12             
+django
 django-braces
 django-cors-headers
 django-countries
@@ -8,8 +9,8 @@ django-crispy-forms
 djangorestframework
 Pillow
 Pmw              
-psycopg2   
-PyQt5          
+#psycopg2   
+#PyQt5          
 pyserial
 requests
 termcolor              
