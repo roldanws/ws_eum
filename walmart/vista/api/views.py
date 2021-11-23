@@ -278,7 +278,7 @@ class registroBoletoApiView(APIView):
         folio = self.request.data.get('registroBoletoRequest').get('folio')
         entrada = self.request.data.get('registroBoletoRequest').get('entrada')
         fecha_expedicion = self.request.data.get('registroBoletoRequest').get('fecha_expedicion')
-        codigo = self.request.data.get('registroBoletoRequest').get('codigo')
+        estado = self.request.data.get('registroBoletoRequest').get('estado')
         registrado = self.request.data.get('registroBoletoRequest').get('registrado')
         tda = self.request.data.get('registroBoletoRequest').get('tienda')
         print("folio:  , tienda: ",folio,tda)
@@ -304,19 +304,21 @@ class registroBoletoApiView(APIView):
 
 
             print("fecha_hora: ",fechahora_boleto)
-            print("entrada",entrada)
+            print("entrada: ",entrada)
 
             equipo = Equipo.objects.filter(id=1)
+            print(equipo)
             boleto = Boleto.objects.create(
                                                 fecha_expedicion_boleto=fechahora_boleto,
                                                 folio_boleto=folio,
                                                 entrada=entrada,
-                                                codigo=codigo,
+                                                estado=estado,
                                                 registrado=registrado,
                                                 equipo_id=equipo[0],
                                                 tienda_id=tienda[0],
                                                 )
-
+            
+            print(equipo,boleto)
             if boleto:
                 print("Se encontro:",boleto)
                 #print("Monto: ", boleto[0].monto)
@@ -329,6 +331,7 @@ class registroBoletoApiView(APIView):
                     'descripcionError': "Registro exitoso",
                     }
                 }
+                print("Boleto Registrado: ", boleto)
             else:
                 content = {
                 'registroBoleto':{
@@ -339,6 +342,7 @@ class registroBoletoApiView(APIView):
 
                 }
                 print("No se encontro:",boleto)
+                return Response(content)
         else: #except
             print("Error al extraer datos")
             content = {
