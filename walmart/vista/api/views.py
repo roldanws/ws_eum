@@ -193,7 +193,7 @@ class consultaBoletoApiView(APIView):
                 "monto": "",
                 "codRepuesta": "01",
                 "codigoError": "03",
-                "descripcionError": "Boleto con tiempo de tolerancia vigente (15 MIN)",
+                "descripcionError": "Boleto con tiempo de tolerancia vigente ({} MIN)".format(tiempo_tolerancia-tiempo_estacionado),
                 "numAutorizacion": ""
                 }
                 }
