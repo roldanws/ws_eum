@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from transaccion.models import Transaccion, Tienda, Boleto
 from equipo.models import Equipo
-from datetime import datetime, timedelta
+from datetime import datetime, timezone, timedelta
+
 from django.db.models import Sum, Q, Count
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
@@ -10,7 +11,7 @@ from django.views.generic.list import ListView
 from .Calculador import Calculador
 from django.utils.timezone import now
 import random
-
+import pytz
 #Vista consultarTransaccion2
 from rest_framework import serializers
 from .serializers import  BoletoSerializer, TransaccionSerializer
@@ -174,6 +175,7 @@ class consultaBoletoApiView(APIView):
             fecha_actual = datetime.now().strftime('%d-%m-%y')
             hora_actual = datetime.now().strftime('%H:%M:%S')
             resultado = calculador.calcular_tarifa(str(fecha_actual),str(hora_actual),str(fecha_boleto),str(hora_boleto),0)
+            
             monto = resultado [0]
             tiempo_estacionado = resultado [1]
             print("fecha_hora: ",fechahora_boleto)
@@ -208,14 +210,45 @@ class consultaBoletoApiView(APIView):
                 folio_boleto = boleto[0].id
 
                 if estado == 1:
-                    print("hoal")
+                    #Actualiza la hora de consulta en el campo update
                     print(datetime.today(),type(str(datetime.today())),fechahora_boleto)
                     Boleto.objects.filter(fecha_expedicion_boleto=fechahora_boleto,entrada=entrada).update(updated=str(datetime.today()))
+                    
+                    """fa = datetime.now().strftime('%Y-%m-%d')
+                    ha = datetime.now().strftime('%H:%M:%S')
+                    fechahora_actual = datetime.strptime(fa + " " + ha , '%Y-%m-%d %H:%M:%S')
+                    print("fechahora_actual",fechahora_actual)
+                    fecha_actual = datetime.now().strftime('%d/%m/%y')
+                    hora_actual = datetime.now().strftime('%H:%M')
+                    print("Hora y fecha actual:", fecha_actual, hora_actual)
+
+                    fechahora_actual = datetime.now().strftime('%d-%m-%y %H:%M:%S')
+                    utc_dt = pytz.timezone ("America/Mexico_City").localize(datetime.strptime (fechahora_actual, "%d-%m-%y %H:%M:%S"), is_dst=None).astimezone(pytz.utc)
+                    f = utc_dt.strftime ("%d-%m-%y %H:%M:%S")
+                    print(utc_dt)
+                    Boleto.objects.filter(fecha_expedicion_boleto=fechahora_boleto,entrada=entrada).update(updated=utc_dt)
+                    """
+
 
                 elif estado == 2:
                     transacciones = Transaccion.objects.filter(folio_boleto=folio_boleto)
                     print("Transacciones:", transacciones)
                     pass
+
+                elif estado == 3:
+                    content = {
+                    "consultaBoleto": {
+                    "idBoleto": idBoleto,
+                    "impresionPantalla": "Gracias por su compra",
+                    "impresionTicket": "Compre Walmart",
+                    "codRepuesta": "01",
+                    "codigoError": "02",
+                    "descripcionError": "BOLETO NO VALIDO",
+                    "numAutorizacion": ""
+                    }
+                    }
+                    print("Boleto obsoleto:",idBoleto)
+                    return Response(content)
 
 
                 print("Se encontro:",boleto)
@@ -763,7 +796,11 @@ class notiBoletoPagadoApiView(APIView):
                 #print("minutos totales: {}".format(minutos_transcurridos_consulta))
                 print("Minutos transcurridos desde consulta de boleto:", minutos_transcurridos_consulta)
                 print("FECHASS:", fecha_consulta,fecha_boleto)
-                resultado = calculador.calcular_tarifa(str(fecha_consulta), str(hora_consulta)[:8], str(fecha_boleto),str(hora_boleto),0)
+                #resultado = calculador.calcular_tarifa(str(fecha_consulta), str(hora_consulta)[:8], str(fecha_boleto),str(hora_boleto),0)
+                fecha_actual_amd = datetime.now().strftime('%d-%m-%y')
+                hora_actual_amd = datetime.now().strftime('%H:%M:%S')
+                print("Datos calculo:",fecha_actual_amd, hora_actual_amd,fecha_boleto,hora_boleto)
+                resultado = calculador.calcular_tarifa(str(fecha_actual_amd), str(hora_actual_amd), str(fecha_boleto),str(hora_boleto),0)                
                 print("RESULTADO:",resultado)
                 """asr = asr
                 dias = resultado[0]
