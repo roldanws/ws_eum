@@ -267,7 +267,7 @@ class consultaBoletoApiView(APIView):
                     'codRepuesta': "00",
                     'codigoError': "00",
                     'descripcionError': "",
-                    'numAutorizacion': str(random.randrange(1,999999))
+                    'numAutorizacion': ""
                     }
                 }
             else:
@@ -687,7 +687,7 @@ class notiBoletoPagadoApiView(APIView):
                     pass
                 else:
                     content = {
-                    "consultaBoleto": {
+                    "notiBoletoPagado": {
                     "idBoleto": idBoleto,
                     "impresionPantalla": "Gracias por su compra",
                     "impresionTicket": "Compre Walmart",
@@ -701,7 +701,7 @@ class notiBoletoPagadoApiView(APIView):
                     return Response(content)
             else:
                 content = {
-                "consultaBoleto": {
+                "notiBoletoPagado": {
                 "idBoleto": idBoleto,
                 "impresionPantalla": "Gracias por su compra",
                 "impresionTicket": "Compre Walmart",
@@ -936,7 +936,7 @@ class notiBoletoPagadoApiView(APIView):
         except: #except
             print("Error al extraer datos")
             content = {
-                "consultaBoleto": {
+                "notiBoletoPagado": {
                 "idBoleto": idBoleto,
                 "impresionPantalla": "Gracias por su compra",
                 "impresionTicket": "Compre Walmart",
@@ -979,7 +979,7 @@ class revBoletoPagadoApiView(APIView):
                     pass
                 else:
                     content = {
-                    "consultaBoleto": {
+                    "revBoletoPagado": {
                     "idBoleto": idBoleto,
                     "impresionPantalla": "Gracias por su compra",
                     "impresionTicket": "Compre Walmart",
@@ -993,7 +993,7 @@ class revBoletoPagadoApiView(APIView):
                     return Response(content)
             else:
                 content = {
-                "consultaBoleto": {
+                "revBoletoPagado": {
                 "idBoleto": idBoleto,
                 "impresionPantalla": "Gracias por su compra",
                 "impresionTicket": "Compre Walmart",
