@@ -1,3 +1,0 @@
-textoBienvenida:Bienvenido
-textoConfiguracion:Configuración
-textoSeleccione: Seleccione una opción
